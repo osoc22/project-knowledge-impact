@@ -35,15 +35,14 @@ for (i in doi_citing_clean) {
   data <- jsonlite::fromJSON(raw, flatten = TRUE)
   matriz[j,1] <- i
   if (is.null(nrow(data))==TRUE){matriz[j,2] <- 0} #if its null, then 0
-  else {matriz[j,2] <- as.numeric(nrow(data))}
+  else {matriz[j,2] <- nrow(data)}
   j <- j+1 
 }
 
 colnames(matriz) <- c('doi', 'times_cited')
 
 #sort by column (doesnt rly work -> need to set datatype 'times_cited' as int)
-matriz_sorted <- matriz[order(matriz[,'times_cited'],decreasing=FALSE),]
-v <- lapply(matriz[,'times_cited'],as.numeric)
+matriz_sorted <- matriz[order(strtoi(matriz[,'times_cited']),decreasing=FALSE),]
 
 #store ordered ids of recs
 id <- c()
