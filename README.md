@@ -1,2 +1,4 @@
-I have pushed my shitty code# project-the-power-of-sharing-knowledge
-I don't want this to be local anymore
+# Temporary readme
+
+Go to this readme to set up the project:
+https://github.com/ThinkR-open/golem
