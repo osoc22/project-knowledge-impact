@@ -2,15 +2,59 @@
 #'
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
-#' @import shiny
+#' @import shiny bs4Dash
 #' @noRd
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    fluidPage(
-      h1("projectimpact")
+    dashboardPage(
+      
+      dashboardHeader(title = "Kwowledge Impact"),
+      
+      dashboardSidebar(
+        sidebarMenu(
+          menuItem("Home", tabName = "home", icon = icon("home")),
+          menuItem("My Profile", tabName = "profile", icon = icon("user")),
+          menuItem("Analytics", tabName = "analytics", icon = icon("th")),
+          menuItem("My Research", tabName = "research", icon = icon("search")),
+          menuItem("Calendar", tabName = "calendar", icon = icon("calendar")),
+          menuItem("Notifications", tabName = "notifications", icon = icon("th")),
+          menuItem("Help Center", tabName = "help", icon = icon("bell")),
+          menuItem("Settings", tabName = "settings", icon = icon("cog"))
+        )
+      ),
+      
+      dashboardBody(
+        tabItems(
+          
+          # Home
+          tabItem(tabName = "home"),
+          
+          # Profile
+          tabItem(tabName = "profile"),
+          
+          # Analytics
+          tabItem(tabName = "analytics"),
+          
+          # Research
+          tabItem(tabName = "research"),
+          
+          # Calendar
+          tabItem(tabName = "calendar"),
+          
+          # Notifications
+          tabItem(tabName = "notifications"),
+          
+          # Help
+          tabItem(tabName = "help"),
+          
+          # Settings
+          tabItem(tabName = "settings")
+          
+        )
+      )
     )
   )
 }

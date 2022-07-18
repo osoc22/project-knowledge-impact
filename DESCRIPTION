@@ -1,10 +1,14 @@
 Package: projectimpact
 Title: The impact of sharing knowledge
 Version: 0.0.0.9000
-Authors@R: person('Pieterjan', 'Dendauw', email = 'pieterjan.dendauw@ugent.be', role = c('cre', 'aut'))
-Description: Motivate and inspire researchers to keep sharing their research output on knowledge portals such as FRIS and Biblio in a durable, qualitative, sustainable & enthusiastic way.
+Authors@R: 
+    person("Pieterjan", "Dendauw", , "pieterjan.dendauw@ugent.be", role = c("cre", "aut"))
+Description: Motivate and inspire researchers to keep sharing their
+    research output on knowledge portals such as FRIS and Biblio in a
+    durable, qualitative, sustainable & enthusiastic way.
 License: What license is it under?
 Imports: 
+    bs4Dash,
     config (>= 0.3.1),
     golem (>= 0.3.2),
     shiny (>= 1.7.1)
