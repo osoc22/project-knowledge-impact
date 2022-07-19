@@ -40,8 +40,25 @@
 // };
 
 
+function addTimeline(workcounts,years){
+    console.log(workcounts)
+    console.log(years)
+    let tekst=""
+    for(let i=years.length-1;i>=0;i--){
+        tekst+=`<li>
+            <p class="diplome">${workcounts[i]} publications</p>
+            <p class="year">${years[i]}</p>
+            <span class="point"></span>
+            <p class="description">
+              you have written ${workcounts[i]} publications in that department
+            </p>
+          </li>`
+    }
+    document.querySelector("#js_timeline").innerHTML=tekst
+
+}
 function showCitationsAndWorkCount(data){
-    console.log(data.counts_by_year)
+    console.log(data)
     let years=[]
     let workcounts=[]
     let citations=[]
@@ -59,10 +76,15 @@ function showCitationsAndWorkCount(data){
         }
       ];
       
-      Plotly.newPlot('js_workCount', plot);
+      Plotly.newPlot('js_workCount', plot,{
+        xaxis: { tickformat: '.0f'}
+      });
       plot[0].y=citations
-      Plotly.newPlot('js_citations', plot);
+      Plotly.newPlot('js_citations', plot,{
+        xaxis: { tickformat: '.0f'}
+      });
     
+    addTimeline(workcounts,years)
 
 }
 
@@ -83,7 +105,7 @@ const loadCitationsAndWorkCount = function(orcid) {
             showCitationsAndWorkCount(jsonObject)
         })
         .catch(function(error) {
-            console.error(`fout bij verwerken json error`);
+            console.error(`fout bij verwerken json ${error}`);
         });
 };
 

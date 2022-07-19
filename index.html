@@ -12,23 +12,26 @@
     <title>DashBoard</title>
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <a class="navbar-brand" href="index.html">Menu</a>
+<!-- <body class="fixed-nav sticky-footer " id="page-top"> -->
+  <body class="fixed-nav" id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" id="mainNav">
+      <!-- <a class="navbar-brand" href="index.html">Menu</a> -->
+      <h1 class="navbar-brand">Menu</h1>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" routerLink="/overview">
+          <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" >
               <span class="nav-link-text">Profile</span>
             </a>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="temperature">
-            <a class="nav-link" routerLink="/temperature">
+            <a class="nav-link" href="research.html" >
               <span class="nav-link-text">My research</span>
             </a>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Energy">
-            <a class="nav-link" routerLink="/energy">
+            <a class="nav-link" href="settings.html" >
               <span class="nav-link-text">Settings</span>
             </a>
           </li>
@@ -50,9 +53,72 @@
         <input type="text" name="orcid" id="orcid">
         <input type="button" value="search" id="searchbtn">
         <div>Based on ORCID</div>
-        </div>      
+
+        <div class="font-weight-bold h3">
+          Profile
+          <p>I will fill this with the correct information of the researcer ut also the leap into electronic typesetting,
+             remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+              Lorem Ipsum passages, and more recently with </p>
+        </div>
+        <div>
+          My career
+          <ol id="js_timeline">
+            <!-- <li>
+              <p class="diplome">4 publications</p>
+              <p class="year">2016</p>
+              <span class="point"></span>
+              <p class="description">
+                you have written 4 publications in that department
+              </p>
+            </li>
+            <li>
+              <p class="diplome">BTS / DUT</p>
+              <p class="year">2016</p>
+              <span class="point"></span>
+              <p class="description">En lien avec la biologie et/ou la zoologie</p>
+            </li>
+            <li>
+              <p class="diplome">Licence</p>
+              <span class="point"></span>
+              <p class="description">En lien avec la biologie et/ou la zoologie</p>
+            </li>
+            <li>
+              <p class="diplome">Master</p>
+                <span class="point"></span>
+              <p class="description">TEST</p>
+            </li>
+            <li>
+            <p class="diplome">Doctorat</p>
+              <span class="point"></span>
+              <p class="description">Souvent nécessaire pour pouvoir accéder aux concours d’embauche de centres de recherche tels que l’INRA ou le CNRS</p>
+            </li>
+            <li>
+              <p class="diplome">Doctorat</p>
+                <span class="point"></span>
+                <p class="description">Souvent nécessaire pour pouvoir accéder aux concours d’embauche de centres de recherche tels que l’INRA ou le CNRS</p>
+            </li>
+            <li>
+              <p class="diplome">Doctorat</p>
+                <span class="point"></span>
+                <p class="description">Souvent nécessaire pour pouvoir accéder aux concours d’embauche de centres de recherche tels que l’INRA ou le CNRS</p>
+            </li>
+            <li>
+              <p class="diplome">Doctorat</p>
+                <span class="point"></span>
+                <p class="description">Souvent nécessaire pour pouvoir accéder aux concours d’embauche de centres de recherche tels que l’INRA ou le CNRS</p>
+            </li> -->
+          </ol>
+        </div>
         <div id="js_citations"></div>
         <div id="js_workCount"></div>
+        </div>      
+        <div>
+          People who were talking about you
+          <ul>
+            <li>MAKZDA ALJZDALZJ</li>
+            <li>mamakndznkm</li>
+          </ul>
+        </div>
 
       </div>
   </body>
