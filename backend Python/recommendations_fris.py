@@ -1,12 +1,8 @@
 import pandas as pd
 import requests
 
-from doi_request_fris import make_request_doi_fris
-from doi_request_fris import get_title_fris
-from doi_request_fris import get_author_fris
-from doi_request_fris import get_year_fris
-from doi_request_fris import get_abstract_fris
-
+from doi_request_fris import make_request_doi_fris, get_title_fris, get_author_fris, get_year_fris, get_abstract_fris
+from profile_fris import make_request_orcid_fris, get_publications_fris
 
 def get_citations_doi(doi: str):
     api_url = "https://w3id.org/oc/index/api/v1/citations/"
@@ -73,7 +69,27 @@ def get_recs_author_fris(doi): #connecting feature
     fris_authors = list(dict.fromkeys(fris_authors)) #eliminates duplicates
     return fris_authors
 
-print(get_recs_author_fris('10.1080/15325008.2012.749554'))
+#print(get_recs_author_fris('10.1080/15325008.2012.749554'))
+
+def get_all_recs_author(orcid):
+    soapResult = make_request_orcid_fris(0, 10, 0, orcid)
+    dois = get_publications_fris(soapResult)
+    fris_authors = []
+    for d in dois:
+        authors = get_recs_author_fris(d)
+        for a in authors:
+            fris_authors += [a]
+    fris_authors = list(dict.fromkeys(fris_authors))
+    return fris_authors
+
+#a = get_all_recs_author('0000-0003-4706-7950')
+#print(a)
+
+# soapResult = make_request_orcid_fris(0, 10, 0, '0000-0003-4706-7950')
+# dois = get_publications_fris(soapResult)
+# print(get_recs_author_fris(dois[0]))
+# print(get_recs_author_fris(dois[1]))
+# print(get_recs_author_fris(dois[2]))
 
 # request = make_request_doi_fris(0,10,0,"10.3390/en10101500")
 # print(get_author_fris(request))
