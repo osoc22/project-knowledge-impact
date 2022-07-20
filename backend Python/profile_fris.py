@@ -6,7 +6,14 @@ from doi_request_fris import get_title_fris
 from doi_request_fris import get_year_fris
 from doi_request_fris import get_abstract_fris
 
-def make_request_orcid_fris(pageNumber: int, pageSize: int, publicationNumber, orcid: str):
+def make_request_orcid_fris(orcid: str, pageNumber: int, pageSize: int, publicationNumber):
+    """
+    :param orcid: '0000-0003-4706-7950' (example format)
+    :param pageNumber:
+    :param pageSize:
+    :param publicationNumber:
+    :return: xml response of orcid (zeep object)
+    """
     data = {
         "criteria": {
             "window": {
@@ -35,9 +42,16 @@ def make_request_orcid_fris(pageNumber: int, pageSize: int, publicationNumber, o
     settings = zeep.Settings(strict=False, xml_huge_tree=True)
     client = zeep.Client(wsdl=wsdl, settings=settings)
     soapResult = client.service.getPersons(**data)
+    return soapResult
 
-    uuid = soapResult['person'][0]['uuid']
-
+def make_request_uuid_fris(uuid: str, pageNumber: int, pageSize: int, publicationNumber):
+    """
+    :param uuid: '1727939a-543a-4184-841f-944ee16db418' (example format)
+    :param pageNumber:
+    :param pageSize:
+    :param publicationNumber:
+    :return: xml result of uuid (zeep object)
+    """
     data2 = {
         "criteria": {
             "window": {
@@ -56,7 +70,6 @@ def make_request_orcid_fris(pageNumber: int, pageSize: int, publicationNumber, o
             }
         }
     }
-
     data2['criteria']['window']['pageNumber'] = pageNumber
     data2['criteria']['window']['pageSize'] = pageSize
     data2['criteria']['associatedPersons']['identifier'] = uuid
@@ -64,10 +77,27 @@ def make_request_orcid_fris(pageNumber: int, pageSize: int, publicationNumber, o
     settings = zeep.Settings(strict=False, xml_huge_tree=True)
     client = zeep.Client(wsdl=wsdl, settings=settings)
     soapResult2 = client.service.getResearchOutput(**data2)
-
     return soapResult2
 
+def get_subject_fris(soapResult):
+    """
+    :param soapResult: xml result of orcid (zeep object) (result of fun make_request_orcid_fris())
+    :return: subject of research associated w orcid id (str)
+    """
+    return soapResult['person'][0]['personOrganisations']['personOrganisation'][0]['organisation']['name']['texts']['text'][0]['_value_1']
+
+def get_uuid_fris(soapResult):
+    """
+    :param soapResult: xml result of orcid (zeep object) (result of fun make_request_orcid_fris())
+    :return: uuid associated w an orcid id (str)
+    """
+    return soapResult['person'][0]['uuid']
+
 def get_publications_fris(soapResult):
+    """
+    :param soapResult: xml result of uuid (zeep object) (result of fun make_request_uuid_fris())
+    :return: list of doi of all publications (list(str))
+    """
     # returns dois of all author´s publications from the soapResult
     data = soapResult['_value_1']
     journals = []
@@ -76,26 +106,35 @@ def get_publications_fris(soapResult):
             journals += [data[i]['journalContribution']['unpaywallDoi']['doiUrl'].replace('https://doi.org/', '')]
         except KeyError:
             journals = journals
-
     return journals
 
-#data = make_request_orcid_fris(0, 10, 0, '0000-0003-4706-7950')
-#print(get_publications_fris(data))
+# data1 = make_request_orcid_fris('0000-0003-4706-7950', 0, 10, 0)
+# uuid = get_uuid_fris(data1)
+# print(uuid)
+# print(get_subject_fris(data1))
+# data2 = make_request_uuid_fris(uuid, 0, 10, 0)
+# print(get_publications_fris(data2))
 
 def get_publications_title_year_abstract_fris(orcid):
-    soapResult = make_request_orcid_fris(0, 10, 0, orcid)
-    dois = get_publications_fris(soapResult)
+    """
+    :param orcid: '0000-0003-4706-7950' (example format)
+    :return: lists of dois, titles, years and abstracts from all research papers published by orcid id
+    """
+    soapResult = make_request_orcid_fris(orcid, 0, 10, 0)
+    uuid = get_uuid_fris(soapResult)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 10, 0)
+    dois = get_publications_fris(soapResult2)
     fris_titles = []
     fris_years = []
     fris_abstracts = []
     for d in dois:
-        soapResult = make_request_doi_fris(0, 10, 0, d)
-        fris_titles += [get_title_fris(soapResult)]
-        fris_years += [get_year_fris(soapResult)]
-        fris_abstracts += [get_abstract_fris(soapResult)]
-    return fris_titles, fris_years, fris_abstracts
+        soapResult2 = make_request_doi_fris(d, 0, 10, 0)
+        fris_titles += [get_title_fris(soapResult2)]
+        fris_years += [get_year_fris(soapResult2)]
+        fris_abstracts += [get_abstract_fris(soapResult2)]
+    return dois, fris_titles, fris_years, fris_abstracts
 
-# fris_titles, fris_years, fris_abstracts = get_publications_title_year_abstract_fris('0000-0003-4706-7950')
+# dois, fris_titles, fris_years, fris_abstracts = get_publications_title_year_abstract_fris('0000-0003-4706-7950')
 # print(fris_titles)
 # print(fris_years)
 # print(fris_abstracts)
