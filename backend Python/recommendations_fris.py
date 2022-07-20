@@ -54,15 +54,26 @@ def get_recs_title_author_year_abstract_fris(doi):
 
     return fris_titles, fris_authors, fris_years, fris_abstracts
 
-fris_titles, fris_authors, fris_years, fris_abstracts = get_recs_title_author_year_abstract_fris('10.1080/15325008.2012.749554')
+#fris_titles, fris_authors, fris_years, fris_abstracts = get_recs_title_author_year_abstract_fris('10.1080/15325008.2012.749554')
 #
-print(fris_authors)
-print(fris_titles)
-print(fris_years)
-print(fris_abstracts)
+#print(fris_authors)
+#print(fris_titles)
+#print(fris_years)
+#print(fris_abstracts)
 
-def get_recs_author_fris():
-    return
+def get_recs_author_fris(doi): #connecting feature
+    dois_sorted = get_citations_doi(doi)
+    fris_authors = []
+    for d in dois_sorted:
+        soapResult = make_request_doi_fris(0, 10, 0, d)
+        if len(soapResult['_value_1']) != 0:
+            authors = get_author_fris(soapResult)
+            for a in authors:
+                fris_authors += [a]
+    fris_authors = list(dict.fromkeys(fris_authors)) #eliminates duplicates
+    return fris_authors
+
+print(get_recs_author_fris('10.1080/15325008.2012.749554'))
 
 # request = make_request_doi_fris(0,10,0,"10.3390/en10101500")
 # print(get_author_fris(request))
