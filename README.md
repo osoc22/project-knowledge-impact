@@ -8,3 +8,4 @@ to start the project
 docker build --tag final .
 docker run -p 5000:5000 final
 ```
+open index.html in your browser
