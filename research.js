@@ -4,10 +4,10 @@
 
 function showPublications(data) {
     console.log(data)
-    let text=""
-    for(let i=0;i<data.title.length;i++){
-        if(data.abstract[i]==""){data.abstract[i]="---"}
-        text+=`<div class="row">
+    let text = ""
+    for (let i = 0; i < data.title.length; i++) {
+        if (data.abstract[i] == "") { data.abstract[i] = "---" }
+        text += `<div class="row">
         <div class="col-11">
           <div class="card">
             <div class="card-body">
@@ -24,18 +24,8 @@ function showPublications(data) {
         </div>
       </div>`
     }
-    document.querySelector("#js_publications").innerHTML=text
-    // for(let i=0;i<data[0].length;i++){
-    //     console.log(i)
-    // for(let j=0;j<data.length;j++){
-    //     console.log(data[j][i])
-    // }
-    //     for(let j in data.length){
-    //     console.log(i)
-    //     console.log(j)
-    //     console.log[data[i]]
-    // }
-    }
+    document.querySelector("#js_publications").innerHTML = text
+}
 
 
 
@@ -43,7 +33,7 @@ function showPublications(data) {
 
 
 const loadPublications = function (orcid) {
-    fetch('http://127.0.0.1:5000/publications/' + orcid)
+    fetch('http://127.0.0.1:5000/myresearch/publications/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);

@@ -3,7 +3,7 @@ from flask_cors import CORS
 import numpy as np
 import pandas as pd
 
-from profile_fris import get_publications_title_year_abstract_fris
+from profile_fris import get_publications_title_year_abstract_fris, get_subject_fris, make_request_orcid_fris, make_request_uuid_fris
 app = Flask(__name__)
 CORS(app)
 
@@ -36,7 +36,7 @@ def getBiblioDownloads(bibid):
     return "THis works"
 
 
-@app.route('/publications/<orcid>')
+@app.route('/myresearch/publications/<orcid>')
 def getPublications(orcid):
     x, dois, fris_titles, fris_years, fris_abstracts = get_publications_title_year_abstract_fris(
         '0000-0003-4706-7950')
@@ -46,6 +46,10 @@ def getPublications(orcid):
     print(dois)
     return jsonify(get_publications_title_year_abstract_fris(orcid))
 
+@app.route("/profile/subject/<orcid>")
+def detSubject(orcid):
+    soapResult = make_request_orcid_fris(orcid, 0, 10, 0)
+    return get_subject_fris(soapResult)
 
 if __name__ == "__main__":
     app.run()

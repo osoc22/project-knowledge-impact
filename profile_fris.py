@@ -142,6 +142,7 @@ def get_publications_title_year_abstract_fris(orcid):
         output["author"]+=[get_author_fris(soapResult2)]
     return output
 
+
 # dois, fris_titles, fris_years, fris_abstracts = get_publications_title_year_abstract_fris('0000-0003-4706-7950')
 # print(fris_titles)
 # print(fris_years)

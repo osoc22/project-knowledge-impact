@@ -55,7 +55,6 @@ function addTimeline(workcounts, years) {
           </li>`
     }
     document.querySelector("#js_timeline").innerHTML = tekst
-
 }
 function showCitationsAndWorkCount(data) {
     console.log(data)
@@ -88,6 +87,10 @@ function showCitationsAndWorkCount(data) {
 
 }
 
+function showDescription(data) {
+    console.log(data)
+    document.querySelector("#js_profile_desc").innerText = data
+}
 
 const loadCitationsAndWorkCount = function (orcid) {
     fetch('http://api.openalex.org/authors/orcid:' + orcid)
@@ -109,11 +112,32 @@ const loadCitationsAndWorkCount = function (orcid) {
         });
 };
 
+const loadProfileDescription = function (orcid) {
+    fetch('127.0.0.1:5000/profile/subject/' + orcid)
+        .then(function (response) {
+            if (!response.ok) {
+                throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
+            } else {
+                console.info('Er is een response teruggekomen van de server');
+                return response.json();
+            }
+        })
+        .then(function (jsonObject) {
+            console.info('json object is aangemaakt');
+            console.info('verwerken data');
+            showDescription(jsonObject)
+        })
+        .catch(function (error) {
+            console.error(`fout bij verwerken json ${error}`);
+        });
+};
+
 
 function searchORCID(e) {
     ORCID = document.querySelector("#orcid").value
     // loadPublications()
     loadCitationsAndWorkCount(ORCID)
+    loadProfileDescription(ORCID)
 }
 
 
@@ -125,5 +149,4 @@ start()
 
 function start() {
     console.log("started")
-    // loadCitationsAndWorkCount("0000-0003-0248-0987")
 }
