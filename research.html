@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-    <link rel="stylesheet" href="styles.css">
-    <script src='https://cdn.plot.ly/plotly-2.12.1.min.js'></script>
-    <script src="index.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
+    <script src="research.js" defer></script>
     <title>DashBoard</title>
-</head>
+  </head>
 
-<!-- <body class="fixed-nav sticky-footer " id="page-top"> -->
+  <!-- <body class="fixed-nav sticky-footer " id="page-top"> -->
   <body class="fixed-nav" id="page-top">
-
-    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <!-- <a class="navbar-brand" href="index.html">Menu</a> -->
       <h1 class="navbar-brand">Menu</h1>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -25,13 +27,18 @@
               <span class="nav-link-text">Profile</span>
             </a>
           </li>
-          <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="temperature">
-            <a class="nav-link" href="research.html" >
+          <li
+            class="nav-item active"
+            data-toggle="tooltip"
+            data-placement="right"
+            title="temperature"
+          >
+            <a class="nav-link" href="research.html">
               <span class="nav-link-text">My research</span>
             </a>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Energy">
-            <a class="nav-link" href="settings.html" >
+            <a class="nav-link" href="settings.html">
               <span class="nav-link-text">Settings</span>
             </a>
           </li>
@@ -39,7 +46,7 @@
       </div>
     </nav>
     <div class="content-wrapper">
-        <div class="container-fluid">
+      <div class="container-md">
         <div>0000-0001-8390-6171</div>
         <div>0000-0002-8596-222X</div>
         <div>0000-0002-8846-9166</div>
@@ -48,15 +55,51 @@
         <div>0000-0001-7445-1881</div>
         <div>0000-0002-1583-5719</div>
         <div>0000-0003-0248-0987</div>
-        <br>
+        <div>0000-0003-4706-7950</div>
+        <br />
         <label for="orcid">Find my research profile:</label>
-        <input type="text" name="orcid" id="orcid">
-        <input type="button" value="search" id="searchbtn">
+        <input type="text" name="orcid" id="orcid" />
+        <input type="button" value="search" id="searchbtn" />
         <div>Based on ORCID</div>
-        </div>      
-        <div id="js_citations"></div>
-        <div id="js_workCount"></div>
-
       </div>
+
+      <!-- <div id="js_citations"></div>
+        <div id="js_workCount"></div> -->
+      <div id="js_publications" class="container-md">
+        <!-- <div class="row">
+          <div class="col-11">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">fris_titles</h5>
+                <h6 class="card-subtitle mb-2 text-muted">fris years</h6>
+                <p class="card-text">
+                  <h6>Abstract</h6>
+                  abstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllll
+                </p>
+                <p class="card-text"><small class="text-muted">auteurs</small></p>
+
+                <a href="#" class="btn btn-primary disabled">details</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div class="row">
+          <div class="col-11">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">fris_titles</h5>
+                <h6 class="card-subtitle mb-2 text-muted">fris years</h6>
+                <p class="card-text">
+                  <h6>Abstract</h6>
+                  abstractleehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllll
+                </p>
+                <a href="#" class="btn btn-primary disabled">details</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
   </body>
 </html>

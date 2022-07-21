@@ -418,7 +418,9 @@
   .content-wrapper{
     border-left: 2px solid #9c9c9c;
     padding-left: 50px;
+    padding-right: 50px;
   }
+
   body{
     color: #505050;
   }
@@ -515,3 +517,8 @@
   li:hover .description {
     display: block;
   }
+
+  .card-title{
+    color:#6558f5;
+  }
+

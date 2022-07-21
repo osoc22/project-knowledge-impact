@@ -1,7 +1,9 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
 import numpy as np
 import pandas as pd
+
+from profile_fris import get_publications_title_year_abstract_fris
 app = Flask(__name__)
 CORS(app)
 
@@ -13,6 +15,7 @@ CORS(app)
 #        'jcr_total_cites', 'jcr_category_quartile', 'jcr_prev_impact_factor',
 #        'jcr_prev_category_quartile']]
 
+
 @app.route("/")
 def home():
     # print(df)
@@ -23,12 +26,26 @@ def home():
 def getBiblioMetrics(bibid):
     # return df[df['id']==int(bibid)].set_index("id").to_json()
     return "hello"
+
+
 @app.route("/biblioDownloads/<bibid>")
 def getBiblioDownloads(bibid):
     # return total_downloads[total_downloads['id']==bibid].set_index("id").to_json()
 
     # return total_downloads.loc[[bibid]].to_json()
     return "THis works"
+
+
+@app.route('/publications/<orcid>')
+def getPublications(orcid):
+    x, dois, fris_titles, fris_years, fris_abstracts = get_publications_title_year_abstract_fris(
+        '0000-0003-4706-7950')
+    print(fris_titles)
+    print(fris_years)
+    print(fris_abstracts)
+    print(dois)
+    return jsonify(get_publications_title_year_abstract_fris(orcid))
+
 
 if __name__ == "__main__":
     app.run()

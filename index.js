@@ -40,12 +40,12 @@
 // };
 
 
-function addTimeline(workcounts,years){
+function addTimeline(workcounts, years) {
     console.log(workcounts)
     console.log(years)
-    let tekst=""
-    for(let i=years.length-1;i>=0;i--){
-        tekst+=`<li>
+    let tekst = ""
+    for (let i = years.length - 1; i >= 0; i--) {
+        tekst += `<li>
             <p class="diplome">${workcounts[i]} publications</p>
             <p class="year">${years[i]}</p>
             <span class="point"></span>
@@ -54,15 +54,15 @@ function addTimeline(workcounts,years){
             </p>
           </li>`
     }
-    document.querySelector("#js_timeline").innerHTML=tekst
+    document.querySelector("#js_timeline").innerHTML = tekst
 
 }
-function showCitationsAndWorkCount(data){
+function showCitationsAndWorkCount(data) {
     console.log(data)
-    let years=[]
-    let workcounts=[]
-    let citations=[]
-    for(let obj of data.counts_by_year){
+    let years = []
+    let workcounts = []
+    let citations = []
+    for (let obj of data.counts_by_year) {
         // console.log(obj)
         years.push(obj.year)
         workcounts.push(obj.works_count)
@@ -70,28 +70,28 @@ function showCitationsAndWorkCount(data){
     }
     let plot = [
         {
-          x: years,
-          y: workcounts,
-          type: 'scatter'
+            x: years,
+            y: workcounts,
+            type: 'scatter'
         }
-      ];
-      
-      Plotly.newPlot('js_workCount', plot,{
-        xaxis: { tickformat: '.0f'}
-      });
-      plot[0].y=citations
-      Plotly.newPlot('js_citations', plot,{
-        xaxis: { tickformat: '.0f'}
-      });
-    
-    addTimeline(workcounts,years)
+    ];
+
+    Plotly.newPlot('js_workCount', plot, {
+        xaxis: { tickformat: '.0f' }
+    });
+    plot[0].y = citations
+    Plotly.newPlot('js_citations', plot, {
+        xaxis: { tickformat: '.0f' }
+    });
+
+    addTimeline(workcounts, years)
 
 }
 
 
-const loadCitationsAndWorkCount = function(orcid) {
-    fetch('http://api.openalex.org/authors/orcid:'+orcid)
-        .then(function(response) {
+const loadCitationsAndWorkCount = function (orcid) {
+    fetch('http://api.openalex.org/authors/orcid:' + orcid)
+        .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
             } else {
@@ -99,31 +99,31 @@ const loadCitationsAndWorkCount = function(orcid) {
                 return response.json();
             }
         })
-        .then(function(jsonObject) {
+        .then(function (jsonObject) {
             console.info('json object is aangemaakt');
             console.info('verwerken data');
             showCitationsAndWorkCount(jsonObject)
         })
-        .catch(function(error) {
+        .catch(function (error) {
             console.error(`fout bij verwerken json ${error}`);
         });
 };
 
 
-function searchORCID(e){
-    ORCID=document.querySelector("#orcid").value
+function searchORCID(e) {
+    ORCID = document.querySelector("#orcid").value
     // loadPublications()
     loadCitationsAndWorkCount(ORCID)
 }
 
 
-document.querySelector("#searchbtn").addEventListener("click",searchORCID)
+document.querySelector("#searchbtn").addEventListener("click", searchORCID)
 
 
 start()
 
 
-function start(){
-    console.log("started")    
+function start() {
+    console.log("started")
     // loadCitationsAndWorkCount("0000-0003-0248-0987")
 }
