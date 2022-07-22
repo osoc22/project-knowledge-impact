@@ -28,7 +28,7 @@ def filter_recs_fris(doi):
     dois = get_citations_doi(doi)
     fris_dois = []
     for d in dois:
-        soapResult = make_request_doi_fris(d, 0, 10, 0)
+        soapResult = make_request_doi_fris(d, 0, 3, 0)
         if len(soapResult['_value_1']) != 0:
             fris_dois += [d]
     return fris_dois
@@ -63,26 +63,28 @@ def sort_recs_year(dois):
     """
     return
 
-def get_recs_title_author_year_abstract_fris(doi):
+def get_recs_title_author_year_abstract_fris(doi):#suggested papers to read
     """
     :param doi: '10.1016/j.foodchem.2022.132915' (example format)
-    :return: lists of titles, authors, years and abstracts from all dois citing doi, sorted by popularity
+    :return: lists of disctionaries with keys: title, authors, years and abstracts from all dois citing doi, sorted by popularity
     """
     dois = filter_recs_fris(doi)
     dois_sorted = sort_recs_popularity(dois)
-    fris_titles = []
-    fris_authors = []
-    fris_years = []
-    fris_abstracts = []
+    output=[]
     for d in dois_sorted:
-        soapResult = make_request_doi_fris(d, 0, 10, 0)
+        soapResult = make_request_doi_fris(d, 0, 3, 0)
         if len(soapResult['_value_1']) != 0:
-            fris_titles += [get_title_fris(soapResult)]
-            fris_authors += [get_author_fris(soapResult)]
-            fris_years += [get_year_fris(soapResult)]
-            fris_abstracts += [get_abstract_fris(soapResult)]
-
-    return fris_titles, fris_authors, fris_years, fris_abstracts
+            try:
+                soapResult['_value_1'][0]['journalContribution']
+                data={}
+                data["title"] =get_title_fris(soapResult)
+                data["year"] =get_year_fris(soapResult)
+                data["abstract"] =get_abstract_fris(soapResult)
+                data["author"]=get_author_fris(soapResult)
+                output.append(data)
+            except KeyError as e:
+                print(e)
+    return output
 
 #fris_titles, fris_authors, fris_years, fris_abstracts = get_recs_title_author_year_abstract_fris('10.1080/15325008.2012.749554')
 #
@@ -99,7 +101,7 @@ def get_recs_author_fris(doi): #connecting feature
     dois = get_citations_doi(doi)
     fris_authors = []
     for d in dois:
-        soapResult = make_request_doi_fris(d, 0, 10, 0)
+        soapResult = make_request_doi_fris(d, 0, 3, 0)
         if len(soapResult['_value_1']) != 0:
             authors = get_author_fris(soapResult)
             for a in authors:
@@ -111,12 +113,12 @@ def get_recs_author_fris(doi): #connecting feature
 
 def get_all_recs_author(orcid):
     """
-        :param doi: '0000-0003-4706-7950' (example format)
+        :param ORCID: '0000-0003-4706-7950' (example format)
         :return: list of authors from all dois citing all research papers published by orcid id (without repetition, without specific order)
         """
-    soapResult = make_request_orcid_fris(orcid, 0, 10, 0)
+    soapResult = make_request_orcid_fris(orcid, 0, 2, 0)
     uuid = get_uuid_fris(soapResult)
-    soapResult2 = make_request_uuid_fris(uuid, 0, 10, 0)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 15, 0)
     dois = get_publications_fris(soapResult2)
     fris_authors = []
     for d in dois:
@@ -125,6 +127,20 @@ def get_all_recs_author(orcid):
             fris_authors += [a]
     fris_authors = list(dict.fromkeys(fris_authors))
     return fris_authors
+
+def get_all_seggested_papers(orcid):
+    """
+        :param ORCID: '0000-0003-4706-7950' (example format)
+        :return: list of authors from all dois citing all research papers published by orcid id (without repetition, without specific order)
+        """
+    soapResult = make_request_orcid_fris(orcid, 0, 2, 0)
+    uuid = get_uuid_fris(soapResult)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 15, 0)
+    dois = get_publications_fris(soapResult2)
+    papers=[]
+    for d in dois:
+        papers.append(get_recs_title_author_year_abstract_fris(d))
+    return papers
 
 #a = get_all_recs_author('0000-0003-4706-7950')
 #print(a)

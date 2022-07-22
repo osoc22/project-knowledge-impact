@@ -1,7 +1,3 @@
-
-
-
-
 function showPublications(data) {
     console.log(data)
     let text = ""
@@ -24,13 +20,9 @@ function showPublications(data) {
         </div>
       </div>`
     }
+    if(text==""){text="no publications available for this researcher in the application"}
     document.querySelector("#js_publications").innerHTML = text
 }
-
-
-
-
-
 
 const loadPublications = function (orcid) {
     fetch('http://127.0.0.1:5000/myresearch/publications/' + orcid)
@@ -52,20 +44,10 @@ const loadPublications = function (orcid) {
         });
 }
 
-function searchORCID(e) {
-    ORCID = document.querySelector("#orcid").value
-    // loadPublications()
-    loadPublications(ORCID)
-}
-
-
-document.querySelector("#searchbtn").addEventListener("click", searchORCID)
-
-
 function start() {
     console.log("started")
-    // loadPublications("0000-0001-8390-6171")
-
+    ORCID=sessionStorage.getItem("ORCID");
+    loadPublications(ORCID)
 }
 
 start()

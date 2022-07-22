@@ -3,7 +3,8 @@ from flask_cors import CORS
 import numpy as np
 import pandas as pd
 
-from profile_fris import get_publications_title_year_abstract_fris, get_subject_fris, make_request_orcid_fris, make_request_uuid_fris
+from profile_fris import get_keywords_fris, get_profile_name_fris, get_publications_fris, get_publications_title_year_abstract_fris, get_subject_fris, get_uuid_fris, make_request_orcid_fris, make_request_uuid_fris
+from recommendations_fris import get_all_recs_author, get_all_seggested_papers
 app = Flask(__name__)
 CORS(app)
 
@@ -38,18 +39,44 @@ def getBiblioDownloads(bibid):
 
 @app.route('/myresearch/publications/<orcid>')
 def getPublications(orcid):
-    x, dois, fris_titles, fris_years, fris_abstracts = get_publications_title_year_abstract_fris(
-        '0000-0003-4706-7950')
-    print(fris_titles)
-    print(fris_years)
-    print(fris_abstracts)
-    print(dois)
+    # x, dois, fris_titles, fris_years, fris_abstracts = get_publications_title_year_abstract_fris(
+    #     '0000-0003-4706-7950')
+    # print(fris_titles)
+    # print(fris_years)
+    # print(fris_abstracts)
+    # print("ik voer uit")
     return jsonify(get_publications_title_year_abstract_fris(orcid))
 
-@app.route("/profile/subject/<orcid>")
-def detSubject(orcid):
-    soapResult = make_request_orcid_fris(orcid, 0, 10, 0)
-    return get_subject_fris(soapResult)
+
+@app.route("/profile/description/<orcid>")
+def getDescription(orcid):
+    soapResult = make_request_orcid_fris(orcid, 0, 25, 0)
+    output = {}
+    output["name"] = get_profile_name_fris(soapResult)
+    output["description"] = get_subject_fris(soapResult)
+    output["keywords"] = get_keywords_fris(soapResult)
+    return jsonify(output)
+
+
+@app.route("/profile/network/<orcid>")
+def getSuggestedConnections(orcid):
+    return jsonify(get_all_recs_author(orcid))
+
+
+@app.route("/profile/recommendations/<orcid>")
+def getRecommendations(orcid):
+    output = get_all_seggested_papers(orcid)
+    return jsonify([x for x in output if x != []])  # to remove empty arrays
+    # return jsonify(get_all_seggested_papers(orcid))
+
+
+@app.route("/profile/dois/<orcid>")
+def getAlldois(orcid):
+    soapResult = make_request_orcid_fris(orcid, 0, 2, 0)
+    uuid = get_uuid_fris(soapResult)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 15, 0)
+    return jsonify(get_publications_fris(soapResult2))
+
 
 if __name__ == "__main__":
     app.run()
