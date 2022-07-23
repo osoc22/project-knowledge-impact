@@ -2,11 +2,10 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 import numpy as np
 import pandas as pd
+from backend.profile_fris import get_keywords_fris, get_profile_name_fris, get_publications_fris, get_publications_title_year_abstract_fris, get_subject_fris, get_uuid_fris, make_request_orcid_fris, make_request_uuid_fris
+from backend.recommendations_fris import get_all_recs_author, get_all_seggested_papers
 from flask_swagger_ui import get_swaggerui_blueprint
 
-
-from profile_fris import get_keywords_fris, get_profile_name_fris, get_publications_fris, get_publications_title_year_abstract_fris, get_subject_fris, get_uuid_fris, make_request_orcid_fris, make_request_uuid_fris
-from recommendations_fris import get_all_recs_author, get_all_seggested_papers
 app = Flask(__name__)
 CORS(app)
 
@@ -33,21 +32,6 @@ app.register_blueprint(swaggerui_blueprint)
 def home():
     # print(df)
     return "Hello flask!"
-
-
-# @app.route("/biblioMetrics/<bibid>")
-# def getBiblioMetrics(bibid):
-#     # return df[df['id']==int(bibid)].set_index("id").to_json()
-#     return "hello"
-
-
-# @app.route("/biblioDownloads/<bibid>")
-# def getBiblioDownloads(bibid):
-#     # return total_downloads[total_downloads['id']==bibid].set_index("id").to_json()
-
-#     # return total_downloads.loc[[bibid]].to_json()
-#     return "THis works"
-
 
 @app.route('/myresearch/publications/<orcid>')
 def getPublications(orcid):

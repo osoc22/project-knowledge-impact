@@ -1,8 +1,8 @@
 import pandas as pd
 import requests
 
-from doi_request_fris import make_request_doi_fris, get_title_fris, get_author_fris, get_year_fris, get_abstract_fris
-from profile_fris import make_request_orcid_fris, get_publications_fris, get_uuid_fris, make_request_uuid_fris
+from backend.doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris, get_year_fris, make_request_doi_fris
+from backend.profile_fris import get_publications_fris, get_uuid_fris, make_request_orcid_fris, make_request_uuid_fris
 
 def get_citations_doi(doi: str):
     """
@@ -18,7 +18,6 @@ def get_citations_doi(doi: str):
         dois += [elem['citing'].replace('coci => ', '')]
     return dois
 
-print(get_citations_doi('10.1080/15325008.2012.749554'))
 
 def filter_recs_fris(doi):
     """
@@ -33,9 +32,6 @@ def filter_recs_fris(doi):
             fris_dois += [d]
     return fris_dois
 
-#k = filter_recs_fris('10.1080/15325008.2012.749554')
-#print(k)
-
 def sort_recs_popularity(dois):
     """
     :param dois: list of dois
@@ -47,14 +43,12 @@ def sort_recs_popularity(dois):
         r2 = requests.get(api_url + elem)
         data2 = r2.json()
         num += [len(data2)]
-    #print(num)
 
     matrix = pd.Series(dois, num)
     matrix.sort_index(ascending=False, inplace=True)
     dois_sorted = matrix.values
     return dois_sorted
 
-#print(sort_recs_popularity(k))
 
 def sort_recs_year(dois):
     """
@@ -86,13 +80,6 @@ def get_recs_title_author_year_abstract_fris(doi):#suggested papers to read
                 print(e)
     return output
 
-#fris_titles, fris_authors, fris_years, fris_abstracts = get_recs_title_author_year_abstract_fris('10.1080/15325008.2012.749554')
-#
-#print(fris_authors)
-#print(fris_titles)
-#print(fris_years)
-#print(fris_abstracts)
-
 def get_recs_author_fris(doi): #connecting feature
     """
     :param doi: '10.1016/j.foodchem.2022.132915' (example format)
@@ -109,7 +96,6 @@ def get_recs_author_fris(doi): #connecting feature
     fris_authors = list(dict.fromkeys(fris_authors)) #eliminates duplicates
     return fris_authors
 
-#print(get_recs_author_fris('10.1080/15325008.2012.749554'))
 
 def get_all_recs_author(orcid):
     """
@@ -142,27 +128,3 @@ def get_all_seggested_papers(orcid):
         papers.append(get_recs_title_author_year_abstract_fris(d))
     return papers
 
-#a = get_all_recs_author('0000-0003-4706-7950')
-#print(a)
-
-# soapResult = make_request_orcid_fris(0, 10, 0, '0000-0003-4706-7950')
-# dois = get_publications_fris(soapResult)
-# print(get_recs_author_fris(dois[0]))
-# print(get_recs_author_fris(dois[1]))
-# print(get_recs_author_fris(dois[2]))
-
-# request = make_request_doi_fris(0,10,0,"10.3390/en10101500")
-# print(get_author_fris(request))
-# print(get_title_fris(request))
-
-# doi = "10.1080/15325008.2012.749554"
-# dois_sorted = get_citations_doi(doi)
-# fris_titles = []
-# fris_authors = []
-# for d in dois_sorted:
-#     soapResult = make_request_doi_fris(0, 10, 0, d)
-#     if len(soapResult['_value_1']) != 0:
-#         fris_titles += [get_title_fris(soapResult)]
-#         fris_authors += [get_author_fris(soapResult)]
-# print(fris_authors)
-# print(fris_titles)

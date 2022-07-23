@@ -80,12 +80,3 @@ def get_abstract_fris(soapResult):
         return soapResult['_value_1'][0]['journalContribution']['researchAbstract']['texts']['text'][0]['_value_1']
     else:
         return ''
-
-
-# r = make_request_doi_fris(0, 10, 0, '10.1016/j.foodchem.2022.132915')
-# r = make_request_doi_fris('10.1016/j.foodchem.2022.132915')
-# r = make_request_doi_fris(0, 10, 0, '10.1186/s11689-022-09423-3')
-# r = make_request_doi_fris(0, 10, 0, '10.1080/15325008.2012.749554')
-# print(r)
-# print(get_author_fris(r))
-

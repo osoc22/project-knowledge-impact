@@ -278,7 +278,7 @@ const loadDois = function (orcid) {
 };
 
 const loadDownloads = function () {
-    fetch('table_doi_downloads_osoc_2022.json')
+    fetch('../backend/table_doi_downloads_osoc_2022.json')
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);

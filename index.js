@@ -2,7 +2,7 @@
 function searchORCID(e) {
     ORCID = document.querySelector("#orcid").value
     sessionStorage.setItem("ORCID", ORCID);
-    window.open("./profile.html","_self")
+    window.open("./frontend/profile.html","_self")
 }
 
 

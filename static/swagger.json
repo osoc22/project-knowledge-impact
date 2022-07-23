@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "this is the documentation for the backend of the knowledge-impact marshmallow  You can find out more about our project at [osoc.be](https://osoc.be/editions/2022/the-impact-of-sharing-knowledge).",
+    "description": "This is the documentation for the backend of the knowledge-impact marshmallow.  You can find out more about our project at [osoc.be](https://osoc.be/editions/2022/the-impact-of-sharing-knowledge).",
     "version": "1.0.0",
     "title": "The Impact of Sharing Knowledge",
     "license": {
