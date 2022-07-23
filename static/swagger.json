@@ -1,0 +1,323 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "this is the documentation for the backend of the knowledge-impact marshmallow  You can find out more about our project at [osoc.be](https://osoc.be/editions/2022/the-impact-of-sharing-knowledge).",
+    "version": "1.0.0",
+    "title": "The Impact of Sharing Knowledge",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "127.0.0.1:5000",
+  "tags": [
+    {
+      "name": "myresearch",
+      "description": "overview of your research"
+    },
+    {
+      "name": "profile",
+      "description": "overview of your profile information"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/myresearch/publications/{orcid}": {
+      "get": {
+        "tags": [
+          "myresearch"
+        ],
+        "summary": "get all publications from this author",
+        "description": "",
+        "operationId": "getPublications",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "orcid",
+            "in": "path",
+            "description": "orcid id of researcher",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Publication"
+            }
+          }
+        }
+      }
+    },
+    "/profile/description/{orcid}": {
+      "get": {
+        "tags": [
+          "profile"
+        ],
+        "summary": "get description from the researcher",
+        "description": "",
+        "operationId": "getDescription",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "orcid",
+            "in": "path",
+            "description": "orcid id of researcher",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Description"
+            }
+          }
+        }
+      }
+    },
+    "/profile/network/{orcid}": {
+      "get": {
+        "tags": [
+          "profile"
+        ],
+        "summary": "get suggestions of people to connect with",
+        "description": "",
+        "operationId": "getSuggestedConnections",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "orcid",
+            "in": "path",
+            "description": "orcid id of researcher",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Network"
+            }
+          }
+        }
+      }
+    },
+    "/profile/recommendations/{orcid}": {
+      "get": {
+        "tags": [
+          "profile"
+        ],
+        "summary": "get recommended papers",
+        "description": "",
+        "operationId": "getRecommendations",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "orcid",
+            "in": "path",
+            "description": "orcid id of researcher",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Recommendation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile/dois/{orcid}": {
+      "get": {
+        "tags": [
+          "profile"
+        ],
+        "summary": "get all dois of all papers published by researcher",
+        "description": "",
+        "operationId": "getAlldois",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "orcid",
+            "in": "path",
+            "description": "orcid id of researcher",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Network"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Publication": {
+      "type": "object",
+      "required": [
+        "name",
+        "abstract",
+        "doi",
+        "title",
+        "year"
+      ],
+      "properties": {
+        "abstract": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "author": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "doi": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "xml": {
+              "name": "doi"
+            }
+          },
+          "format": "int64"
+        },
+        "title": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "year": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "xml": {
+        "name": "Publications"
+      }
+    },
+    "Recommendation": {
+      "type": "object",
+      "required": [
+        "name",
+        "abstract",
+        "title",
+        "year"
+      ],
+      "properties": {
+        "abstract": {
+          "type": "string"
+        },
+        "author": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "Recommendation"
+      }
+    },
+    "Description": {
+      "type": "object",
+      "required": [
+        "description",
+        "keywords",
+        "name"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "keyword"
+            }
+          },
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Description"
+      }
+    },
+    "Network": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "xml": {
+        "name": "Network"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

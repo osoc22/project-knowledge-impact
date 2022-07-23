@@ -97,7 +97,6 @@ function showRecommendations(data) {
     console.log(data)
     let text = ""
     for (let obj of data) {
-        obj = obj[0]
         if (obj.abstract == "") { obj.abstract = "---" }
         text += `<div class="row">
         <div class="col-11">

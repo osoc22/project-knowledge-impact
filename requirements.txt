@@ -9,3 +9,4 @@ flask-cors
 zeep
 numpy
 pandas
+flask-swagger-ui
