@@ -9,3 +9,5 @@ docker build --tag final .
 docker run -p 5000:5000 final
 ```
 open index.html in your browser
+
+for documentation, check http://127.0.0.1:5000/api/docs/ for the Swagger UI docs
