@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" /> -->
+    <script src="https://kit.fontawesome.com/289ba4bf90.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
+
+    <script src="profile.js" defer></script>
+    <title>DashBoard</title>
+</head>
+
+<!-- <body class="fixed-nav sticky-footer " id="page-top"> -->
+
+<body class="fixed-nav" id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <!-- <a class="navbar-brand" href="index.html">Menu</a> -->
+        <h1 class="navbar-brand"><a href="index.html">Menu</a></h1>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="profile.html">
+                        <span class="nav-link-text">Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="temperature">
+                    <a class="nav-link" href="research.html">
+                        <span class="nav-link-text">My research</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Energy">
+                    <a class="nav-link" href="settings.html">
+                        <span class="nav-link-text">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <div class="container-md">
+            <div class="font-weight-bold h3">
+                <span id="js_name">Name</span>
+                <p id="js_profile_desc">
+                    description not available
+                </p>
+            </div>
+            <div>
+                <h2>My career</h2>
+                <ol id="js_timeline">
+                    not available
+                    <!-- <li>
+              <p class="diplome">4 publications</p>
+              <p class="year">2016</p>
+              <span class="point"></span>
+              <p class="description">
+                you have written 4 publications in that department
+              </p>
+            </li>
+            <li>
+              <p class="diplome">BTS / DUT</p>
+              <p class="year">2016</p>
+              <span class="point"></span>
+              <p class="description">En lien avec la biologie et/ou la zoologie</p>
+            </li>
+            <li>
+              <p class="diplome">Licence</p>
+              <span class="point"></span>
+              <p class="description">En lien avec la biologie et/ou la zoologie</p>
+            </li>
+            <li>
+              <p class="diplome">Master</p>
+                <span class="point"></span>
+              <p class="description">TEST</p>
+            </li>
+            <li>
+            <p class="diplome">Doctorat</p>
+              <span class="point"></span>
+              <p class="description">Souvent nécessaire pour pouvoir accéder aux concours d’embauche de centres de recherche tels que l’INRA ou le CNRS</p>
+            </li>
+            <li>
+              <p class="diplome">Doctorat</p>
+                <span class="point"></span>
+                <p class="description">Souvent nécessaire pour pouvoir accéder aux concours d’embauche de centres de recherche tels que l’INRA ou le CNRS</p>
+            </li>
+            <li>
+              <p class="diplome">Doctorat</p>
+                <span class="point"></span>
+                <p class="description">Souvent nécessaire pour pouvoir accéder aux concours d’embauche de centres de recherche tels que l’INRA ou le CNRS</p>
+            </li>
+            <li>
+              <p class="diplome">Doctorat</p>
+                <span class="point"></span>
+                <p class="description">Souvent nécessaire pour pouvoir accéder aux concours d’embauche de centres de recherche tels que l’INRA ou le CNRS</p>
+            </li> -->
+                </ol>
+            </div>
+        </div>
+        <div class="container-md">
+            <div class="row section">
+                <div class="col-6">
+                    <div id="js_workCount"></div>
+                </div>
+                <div class="col-6">
+                    <div id="js_citations"></div>
+                </div>
+            </div>
+            <div class="row section">
+                <div class="col-6">
+                    <div id="js_downloads"></div>
+                </div>
+                <!-- <div class="col-6">
+          <div class="row">
+
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+
+        </div> -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Tools that might help you</h2>
+            <div id="js_tools" class="row gy-5">
+                loading, please wait
+                <!-- <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h6 class="card-subtitle mb-2 text-muted">organisation</h6>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div> -->
+            </div>
+        </div>
+
+        <div class="section">
+
+            <h2>People who noticed you</h2>
+            <div id="js_connections" class="row gy-5">
+                loading, please wait
+                <!-- <div class="col-2">
+          <h3>Circle Avatar</h3>
+
+          <a href="#" class="circle">
+            <img height="128" width="128" src="https://i.pravatar.cc/300" alt="Cloud Chen" />
+          </a>
+        </div> -->
+
+                <!-- <div class="col-2">
+            <h3>Circle Avatar</h3>
+
+            <a href="#" class="circle">
+              <img height="128" width="128" src="https://i.pravatar.cc/310" alt="Cloud Chen" />
+            </a>
+          </div>
+          <div class="col-2">
+            <h3>Circle Avatar</h3>
+
+            <a href="#" class="circle">
+              <img height="128" width="128" src="https://i.pravatar.cc/310" alt="Cloud Chen" />
+            </a>
+          </div>
+          <div class="col-2">
+            <h3>Circle Avatar</h3>
+
+            <a href="#" class="circle">
+              <img height="128" width="128" src="https://i.pravatar.cc/310" alt="Cloud Chen" />
+            </a>
+          </div>
+          <div class="col-2">
+            <h3>Circle Avatar</h3>
+
+            <a href="#" class="circle">
+              <img height="128" width="128" src="https://i.pravatar.cc/301" alt="Cloud Chen" />
+            </a>
+          </div>
+          <div class="col-2">
+            <h3>Circle Avatar</h3>
+
+            <a href="#" class="circle">
+              <img height="128" width="128" src="https://i.pravatar.cc/310" alt="Cloud Chen" />
+            </a>
+          </div>
+          <div class="col-2">
+            <h3>Circle Avatar</h3>
+
+            <a href="#" class="circle">
+              <img height="128" width="128" src="https://i.pravatar.cc/310" alt="Cloud Chen" />
+            </a>
+          </div> -->
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+
+            <h2>Recommended papers</h2>
+            <span id="js_recommendation">
+                loading, please wait
+                <!-- <div class="row">
+          <div class="col-11">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">fris_titles</h5>
+                <h6 class="card-subtitle mb-2 text-muted">fris years</h6>
+                <p class="card-text">
+                <h6>Abstract</h6>
+                abstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllllabstractlejhlzehfljzehfjllllllllllllllllllll
+                </p>
+                <p class="card-text"><small class="text-muted">auteurs</small></p>
+
+                <a href="#" class="btn btn-primary disabled">details</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+            </span>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
