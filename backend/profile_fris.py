@@ -1,15 +1,18 @@
 
 import zeep
 
-from backend.doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris, get_year_fris, make_request_doi_fris
+from typing import List
 
-def make_request_orcid_fris(orcid: str, pageNumber: int, pageSize: int, publicationNumber):
+from doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris, get_year_fris, make_request_doi_fris
+
+def make_request_orcid_fris(orcid: str, pageNumber: int = 0, pageSize: int = 2, publicationNumber: int = 0) -> zeep.AnyObject:
     """
-    :param orcid: '0000-0003-4706-7950' (example format)
+    :param orcid: orcid from which to get xml response (example format: '0000-0003-4706-7950')
     :param pageNumber:
     :param pageSize:
     :param publicationNumber:
-    :return: xml response of orcid (zeep object)
+    :return: xml response from orcid (zeep object) (contains info such as uuid, subject, keywords and profile name)
+            - if doi is not found in FRIS -> returns xml response with 'person': [] and 'total': 0 (empty)
     """
     data = {
         "criteria": {
@@ -32,8 +35,8 @@ def make_request_orcid_fris(orcid: str, pageNumber: int, pageSize: int, publicat
             }
         }
     }
-    data['criteria']['window']['pageNumber'] = pageNumber
-    data['criteria']['window']['pageSize'] = pageSize
+    data['criteria']['window']['pageNumber'] = str(pageNumber)
+    data['criteria']['window']['pageSize'] = str(pageSize)
     data['criteria']['sources']['source']['identifier'] = orcid
     wsdl = 'https://frisr4.researchportal.be/ws/PersonServiceFRIS?wsdl'
     settings = zeep.Settings(strict=False, xml_huge_tree=True)
@@ -42,13 +45,14 @@ def make_request_orcid_fris(orcid: str, pageNumber: int, pageSize: int, publicat
     return soapResult
 
 
-def make_request_uuid_fris(uuid: str, pageNumber: int, pageSize: int, publicationNumber):
+def make_request_uuid_fris(uuid: str, pageNumber: int = 0, pageSize: int = 15, publicationNumber: int = 0) -> zeep.AnyObject:
     """
-    :param uuid: '1727939a-543a-4184-841f-944ee16db418' (example format)
+    :param uuid: uuid from which to get xml response (example format: '1727939a-543a-4184-841f-944ee16db418')
     :param pageNumber:
     :param pageSize:
     :param publicationNumber:
-    :return: xml result of uuid (zeep object)
+    :return: xml response of uuid (zeep object) (contains info such as research papers published)
+            - if uuid is not found in FRIS -> returns xml response with '_value_1': {} and 'total': 0 (empty)
     """
     data2 = {
         "criteria": {
@@ -68,8 +72,8 @@ def make_request_uuid_fris(uuid: str, pageNumber: int, pageSize: int, publicatio
             }
         }
     }
-    data2['criteria']['window']['pageNumber'] = pageNumber
-    data2['criteria']['window']['pageSize'] = pageSize
+    data2['criteria']['window']['pageNumber'] = str(pageNumber)
+    data2['criteria']['window']['pageSize'] = str(pageSize)
     data2['criteria']['associatedPersons']['identifier'] = uuid
     wsdl = 'https://frisr4.researchportal.be/ws/ResearchOutputServiceFRIS?wsdl'
     settings = zeep.Settings(strict=False, xml_huge_tree=True)
@@ -78,79 +82,88 @@ def make_request_uuid_fris(uuid: str, pageNumber: int, pageSize: int, publicatio
     return soapResult2
 
 
-def get_subject_fris(soapResult):
+def get_uuid_fris(soapResult: zeep.AnyObject) -> str:
     """
-    :param soapResult: xml result of orcid (zeep object) (result of fun make_request_orcid_fris())
-    :return: subject of research associated w orcid id (str)
-    """
-    return soapResult['person'][0]['personOrganisations']['personOrganisation'][0]['organisation']['name']['texts']['text'][0]['_value_1']
-
-
-def get_keywords_fris(soapResult):
-    """
-    :param soapResult: xml result of orcid (zeep object) (result of fun make_request_orcid_fris())
-    :return: keywords associated to orcid id (str)
+    :param soapResult: xml result of make_request_orcid_fris() function (zeep object)
+    :return: uuid associated w the orcid used to generate xml result
+            - if xml result has no uuid -> returns ''
     """
     try:
-        return [x["_value_1"] for x in soapResult['person'][0]['keywords']["keyword"] ]
-    except TypeError:
+        return soapResult['person'][0]['uuid']
+    except:
+        return ''
+
+
+def get_subject_fris(soapResult: zeep.AnyObject) -> str:
+    """
+    :param soapResult: xml result of make_request_orcid_fris() function (zeep object)
+    :return: subject of research associated w the orcid id used to generate xml result
+            - if xml result has no subject -> returns ''
+    """
+    try:
+        return soapResult['person'][0]['personOrganisations']['personOrganisation'][0]['organisation']['name']['texts']['text'][0]['_value_1']
+    except:
+        return ''
+
+
+def get_keywords_fris(soapResult: zeep.AnyObject) -> List[str]:
+    """
+    :param soapResult: xml result of make_request_orcid_fris() function (zeep object)
+    :return: keywords associated w the orcid id used to generate xml result
+            - if xml result has no keywords -> returns []
+    """
+    try:
+        return [x["_value_1"] for x in soapResult['person'][0]['keywords']["keyword"]]
+    except:
         return []
 
 
-def get_profile_name_fris(soapResult):
+def get_profile_name_fris(soapResult: zeep.AnyObject):
     """
-    :param soapResult: xml result of orcid (zeep object) (result of fun make_request_orcid_fris())
-    :return: name of researcher associated w orcid id (str)
+    :param soapResult: xml result of make_request_orcid_fris() function (zeep object)
+    :return: name of researcher associated w the orcid id used to generate xml result
+            - if xml result has no firstName and/or lastName -> returns ''
     """
-    return soapResult['person'][0]['name']['firstName']+" "+soapResult['person'][0]['name']['lastName']
+    try:
+        return soapResult['person'][0]['name']['firstName'] + " " + soapResult['person'][0]['name']['lastName']
+    except:
+        return ''
 
 
-def get_uuid_fris(soapResult):
+def get_publications_fris(soapResult: zeep.AnyObject) -> List[str]:
     """
-    :param soapResult: xml result of orcid (zeep object) (result of fun make_request_orcid_fris())
-    :return: uuid associated w an orcid id (str)
+    :param soapResult: xml result of make_request_uuid_fris() function (zeep object)
+    :return: list of dois of all published research papers associated w the uuid used to generate xml result
+            - if xml result includes no publications or no publication is a research paper -> returns []
     """
-    return soapResult['person'][0]['uuid']
-
-
-def get_publications_fris(soapResult):
-    """
-    :param soapResult: xml result of uuid (zeep object) (result of fun make_request_uuid_fris())
-    :return: list of doi of all publications (list(str))
-    """
-    # returns dois of all author´s publications from the soapResult
     data = soapResult['_value_1']
     journals = []
     for i in range(0, len(data)):
-        try:
+        try: # check if response is a research paper and, if it is, clean it and append it
             journals += [data[i]['journalContribution']['unpaywallDoi']
                          ['doiUrl'].replace('https://doi.org/', '')]
-        except Exception as e:
-            print(e)
-            journals = journals
+        except KeyError:
+            pass # if it is not, then skip
     return journals
 
 
-def get_publications_title_year_abstract_fris(orcid):
+def get_publications_title_year_abstract_fris(orcid: str) -> List[dict]:
     """
-    :param orcid: '0000-0003-4706-7950' (example format)
-    :return: lists of dois, titles, years and abstracts from all research papers published by orcid id
+    :param orcid: orcid from which to get research publications (example format: '0000-0003-4706-7950')
+    :return: list of dictionaries with info from each published research paper by orcid id (title, author(s), year and abstract)
+             - if any of conditions mentioned in any of the functions used take place -> returns []
     """
     soapResult = make_request_orcid_fris(orcid, 0, 2, 0)
     uuid = get_uuid_fris(soapResult)
     soapResult2 = make_request_uuid_fris(uuid, 0, 30, 0)
     dois = get_publications_fris(soapResult2)
-    output = {}
-    output["doi"] = dois
-    output["title"] = []
-    output["year"] = []
-    output["abstract"] = []
-    output["author"] = []
+    output = []
     for d in dois:
         soapResult2 = make_request_doi_fris(d, 0, 3, 0)
-        output["title"] += [get_title_fris(soapResult2)]
-        output["year"] += [get_year_fris(soapResult2)]
-        output["abstract"] += [get_abstract_fris(soapResult2)]
-        output["author"] += [get_author_fris(soapResult2)]
+        data = {}
+        data["title"] = get_title_fris(soapResult2)
+        data["year"] = get_year_fris(soapResult2)
+        data["abstract"] = get_abstract_fris(soapResult2)
+        data["author"] = get_author_fris(soapResult2)
+        output.append(data)
     return output
-
