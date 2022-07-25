@@ -186,7 +186,7 @@ function showTools(data){
 
 //////////load data////////////////////
 const loadCitationsAndWorkCount = function (orcid) {
-    fetch('http://api.openalex.org/authors/orcid:' + orcid)
+    fetch('https://api.openalex.org/authors/orcid:' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
