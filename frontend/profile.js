@@ -65,11 +65,11 @@ function showDescription(data) {
     // console.log(data)
     document.querySelector("#js_profile_desc").innerText = data.description
     document.querySelector("#js_name").innerText = data.name
-    if(data.keywords.length>0){
-        loadTools(data.keywords[Math.floor(Math.random()*data.keywords.length)])
+    if (data.keywords.length > 0) {
+        loadTools(data.keywords[Math.floor(Math.random() * data.keywords.length)])
     }
-    else{
-        document.querySelector("#js_tools").innerText="no tools available"
+    else {
+        document.querySelector("#js_tools").innerText = "no tools available"
     }
 }
 
@@ -89,7 +89,7 @@ function showConnections(data) {
         `
         i++
     }
-    if (text==""){text="no connections available"}
+    if (text == "") { text = "no connections available" }
     document.querySelector("#js_connections").innerHTML = text
 }
 
@@ -115,7 +115,7 @@ function showRecommendations(data) {
         </div>
       </div>`
     }
-    if (text==""){text="no recommendations available"}
+    if (text == "") { text = "no recommendations available" }
     document.querySelector("#js_recommendation").innerHTML = text
 }
 
@@ -162,26 +162,26 @@ function showDownloads(data) {
 
 }
 
-function showTools(data){
+function showTools(data) {
     console.log(data)
     //show max 2 tools
-    let text=""
-    for(let i=0;i<data.results.length;i++){
+    let text = ""
+    for (let i = 0; i < data.results.length; i++) {
         console.log(data)
-        text+=`
+        text += `
         <div class="card" style="width: 18rem;">
         <img src="${data.results[i].logo}" class="card-img-top" alt="${data.results[i].abbreviation}">
         <div class="card-body">
           <h5 class="card-title">${data.results[i].name}</h5>
-          <p class="card-text">${data.results[i].description.substr(0,105)+'...'}</p>
+          <p class="card-text">${data.results[i].description.substr(0, 105) + '...'}</p>
           <h6 class="card-subtitle mb-2 text-muted">organisation: ${data.facets[1].values[i].label}</h6>
           <a href="${data.results[i].webpage}" class="btn btn-primary">learn More</a>
       </div>
     </div>
     `
     }
-    if (text==""){text="no tools available. refresh, sometimes it helps ;)"}
-    document.querySelector("#js_tools").innerHTML=text
+    if (text == "") { text = "no tools available. refresh, sometimes it helps ;)" }
+    document.querySelector("#js_tools").innerHTML = text
 }
 
 //////////load data////////////////////
@@ -296,11 +296,11 @@ const loadDownloads = function () {
 };
 
 const loadTools = function (keyword) {
-    console.log('https://api.eosc-portal.eu/resource/all?catalogue_id=eosc&query='+keyword)
-    fetch('https://api.eosc-portal.eu/resource/all?catalogue_id=eosc&'+ new URLSearchParams({
+    console.log('https://api.eosc-portal.eu/resource/all?catalogue_id=eosc&query=' + keyword)
+    fetch('https://api.eosc-portal.eu/resource/all?catalogue_id=eosc&' + new URLSearchParams({
         query: keyword
     }))
-    .then(function (response) {
+        .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
             } else {
@@ -324,7 +324,7 @@ start()
 function start() {
     console.log("started")
     loadDownloads()
-    ORCID=sessionStorage.getItem("ORCID");
+    ORCID = sessionStorage.getItem("ORCID");
     loadDois(ORCID)
     loadCitationsAndWorkCount(ORCID)
     loadProfileDescription(ORCID)
