@@ -206,7 +206,7 @@ const loadCitationsAndWorkCount = function (orcid) {
 
 
 const loadProfileDescription = function (orcid) {
-    fetch('http://127.0.0.1:5000/profile/description/' + orcid)
+    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/profile/description/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
@@ -224,7 +224,7 @@ const loadProfileDescription = function (orcid) {
 };
 
 const loadSuggestedConections = function (orcid) {
-    fetch('http://127.0.0.1:5000/profile/network/' + orcid)
+    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/profile/network/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
@@ -242,7 +242,7 @@ const loadSuggestedConections = function (orcid) {
 };
 
 const loadRecommendations = function (orcid) {
-    fetch('http://127.0.0.1:5000/profile/recommendations/' + orcid)
+    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/profile/recommendations/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
@@ -260,7 +260,7 @@ const loadRecommendations = function (orcid) {
 };
 
 const loadDois = function (orcid) {
-    fetch('http://127.0.0.1:5000/profile/dois/' + orcid)
+    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/profile/dois/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);

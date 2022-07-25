@@ -25,7 +25,7 @@ function showPublications(data) {
 }
 
 const loadPublications = function (orcid) {
-    fetch('http://127.0.0.1:5000/myresearch/publications/' + orcid)
+    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/myresearch/publications/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
