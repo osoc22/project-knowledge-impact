@@ -2,12 +2,11 @@ from typing import List
 
 import zeep
 
-def make_request_doi_fris(doi: str, pageNumber: int = 0, pageSize: int = 15, publicationNumber: int = 0) -> zeep.AnyObject:
+def make_request_doi_fris(doi: str, pageNumber: int = 0, pageSize: int = 15) -> zeep.AnyObject:
     """
     :param doi: doi from which to get xml response (example format: '10.1016/j.foodchem.2022.132915')
-    :param pageNumber:
-    :param pageSize:
-    :param publicationNumber:
+    :param pageNumber: requested page number
+    :param pageSize: quantity of results returned in each page
     :return: xml response from doi (zeep object) (contains info such as title, author(s), year and abstract)
             - if doi is not found in FRIS -> returns xml response with '_value_1': [] and 'total': 0 (empty)
     """

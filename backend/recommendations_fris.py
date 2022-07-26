@@ -31,7 +31,7 @@ def filter_recs_fris(doi: str) -> List[str]:
     dois = get_citations_doi(doi)
     fris_dois = []
     for d in dois:
-        soapResult = make_request_doi_fris(d, 0, 3, 0)
+        soapResult = make_request_doi_fris(d, 0, 3)
         if len(soapResult['_value_1']) != 0: # check if response is empty
             fris_dois += [d]
     return fris_dois
@@ -75,7 +75,7 @@ def get_recs_title_author_year_abstract_fris(doi: str) -> List[dict]: # suggests
     dois_sorted = sort_recs_popularity(dois)
     output = []
     for d in dois_sorted:
-        soapResult = make_request_doi_fris(d, 0, 3, 0)
+        soapResult = make_request_doi_fris(d, 0, 3)
         try:
             soapResult['_value_1'][0]['journalContribution'] # check if response is a research paper
             data = {}
@@ -95,9 +95,9 @@ def get_all_recs_title_author_year_abstract(orcid: str) -> List[dict]: # suggest
         :return: list of dictionaries with info from each citing doi (title, author(s), year and abstract), sorted by popularity
                  - if any of conditions mentioned in functions used take place -> returns []
         """
-    soapResult = make_request_orcid_fris(orcid, 0, 2, 0)
+    soapResult = make_request_orcid_fris(orcid, 0, 2)
     uuid = get_uuid_fris(soapResult)
-    soapResult2 = make_request_uuid_fris(uuid, 0, 15, 0)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 15)
     dois = get_publications_fris(soapResult2)
     fris_papers = []
     for d in dois:
@@ -117,7 +117,7 @@ def get_recs_author_fris(doi: str) -> List[str]: # suggests other authors (those
     dois = filter_recs_fris(doi)
     fris_authors = []
     for d in dois:
-        soapResult = make_request_doi_fris(d, 0, 3, 0)
+        soapResult = make_request_doi_fris(d, 0, 3)
         authors = get_author_fris(soapResult)
         for a in authors:
             fris_authors += [a]
@@ -133,9 +133,9 @@ def get_all_recs_author(orcid: str) -> List[str]: # suggests other authors (thos
                  if orcid id doesnt exist
                  if researcher has no publications
         """
-    soapResult = make_request_orcid_fris(orcid, 0, 2, 0)
+    soapResult = make_request_orcid_fris(orcid, 0, 2)
     uuid = get_uuid_fris(soapResult)
-    soapResult2 = make_request_uuid_fris(uuid, 0, 15, 0)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 15)
     dois = get_publications_fris(soapResult2)
     fris_authors = []
     for d in dois:

@@ -8,9 +8,8 @@ from doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris,
 def make_request_orcid_fris(orcid: str, pageNumber: int = 0, pageSize: int = 2) -> zeep.AnyObject:
     """
     :param orcid: orcid from which to get xml response (example format: '0000-0003-4706-7950')
-    :param pageNumber:
-    :param pageSize:
-    :param publicationNumber:
+    :param pageNumber: requested page number
+    :param pageSize: quantity of results returned in each page
     :return: xml response from orcid (zeep object) (contains info such as uuid, subject, keywords and profile name)
             - if doi is not found in FRIS -> returns xml response with 'person': [] and 'total': 0 (empty)
     """
@@ -50,7 +49,6 @@ def make_request_uuid_fris(uuid: str, pageNumber: int = 0, pageSize: int = 15) -
     :param uuid: uuid from which to get xml response (example format: '1727939a-543a-4184-841f-944ee16db418')
     :param pageNumber: requested page number
     :param pageSize: quantity of results returned in each page
-    :param publicationNumber:
     :return: xml response of uuid (zeep object) (contains info such as research papers published)
             - if uuid is not found in FRIS -> returns xml response with '_value_1': {} and 'total': 0 (empty)
     """
@@ -153,13 +151,13 @@ def get_publications_title_year_abstract_fris(orcid: str) -> List[dict]:
     :return: list of dictionaries with info from each published research paper by orcid id (title, author(s), year and abstract)
              - if any of conditions mentioned in any of the functions used take place -> returns []
     """
-    soapResult = make_request_orcid_fris(orcid, 0, 2, 0)
+    soapResult = make_request_orcid_fris(orcid, 0, 2)
     uuid = get_uuid_fris(soapResult)
-    soapResult2 = make_request_uuid_fris(uuid, 0, 30, 0)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 30)
     dois = get_publications_fris(soapResult2)
     output = []
     for d in dois:
-        soapResult2 = make_request_doi_fris(d, 0, 3, 0)
+        soapResult2 = make_request_doi_fris(d, 0, 3)
         data = {}
         data["title"] = get_title_fris(soapResult2)
         data["year"] = get_year_fris(soapResult2)
