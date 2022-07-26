@@ -86,6 +86,8 @@ function showConnections(data) {
         i++
     }
     if (text == "") { text = "no connections available" }
+    document.querySelector("#js_connections").classList.add('row')
+
     document.querySelector("#js_connections").innerHTML = text
 }
 
@@ -178,6 +180,7 @@ function showTools(data) {
     `
     }
     if (text == "") { text = "no tools available. refresh, sometimes it helps ;)" }
+    document.querySelector("#js_tools").classList.add('row')
     document.querySelector("#js_tools").innerHTML = text
 }
 
