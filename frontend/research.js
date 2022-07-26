@@ -1,18 +1,22 @@
+// let flask_hostname="https://api.the-impact-of-sharing-knowledge.osoc.be"
+let flask_hostname="http://127.0.0.1:5000"
+
+
 function showPublications(data) {
     console.log(data)
     let text = ""
-    for (let i = 0; i < data.title.length; i++) {
-        if (data.abstract[i] == "") { data.abstract[i] = "---" }
+    for (let obj of data) {
+        if (obj.abstract == "") { obj.abstract = "---" }
         text += `<div class="row">
         <div class="col-11">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">${data.title[i]}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">${data.year[i]}</h6>
+              <h5 class="card-title">${obj.title}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">${obj.year}</h6>
               <p class="card-text"><h6>Abstract</h6>
-                ${data.abstract[i]}
+                ${obj.abstract}
                 </p>
-              <p class="card-text"><small class="text-muted">${data.author[i]}</small></p>
+              <p class="card-text"><small class="text-muted">${obj.author}</small></p>
 
               <a href="#" class="btn btn-primary disabled">details</a>
             </div>
@@ -25,7 +29,7 @@ function showPublications(data) {
 }
 
 const loadPublications = function (orcid) {
-    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/myresearch/publications/' + orcid)
+    fetch(flask_hostname+'/myresearch/publications/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);

@@ -1,5 +1,6 @@
 let DOWNLOADS = ""
-
+// let flask_hostname="https://api.the-impact-of-sharing-knowledge.osoc.be"
+let flask_hostname="http://127.0.0.1:5000"
 /////show data/////////////////
 
 function addTimeline(workcounts, years) {
@@ -206,7 +207,7 @@ const loadCitationsAndWorkCount = function (orcid) {
 
 
 const loadProfileDescription = function (orcid) {
-    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/profile/description/' + orcid)
+    fetch(flask_hostname+'/profile/description/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
@@ -224,7 +225,7 @@ const loadProfileDescription = function (orcid) {
 };
 
 const loadSuggestedConections = function (orcid) {
-    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/profile/network/' + orcid)
+    fetch(flask_hostname+'/profile/network/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
@@ -242,7 +243,7 @@ const loadSuggestedConections = function (orcid) {
 };
 
 const loadRecommendations = function (orcid) {
-    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/profile/recommendations/' + orcid)
+    fetch(flask_hostname+'/profile/recommendations/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);
@@ -260,7 +261,7 @@ const loadRecommendations = function (orcid) {
 };
 
 const loadDois = function (orcid) {
-    fetch('https://api.the-impact-of-sharing-knowledge.osoc.be/profile/dois/' + orcid)
+    fetch(flask_hostname+'/profile/dois/' + orcid)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);

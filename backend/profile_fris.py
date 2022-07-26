@@ -1,9 +1,10 @@
 
+from typing import List
 import zeep
 
-from typing import List
+from backend.doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris, get_year_fris, make_request_doi_fris
 
-from doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris, get_year_fris, make_request_doi_fris
+
 
 def make_request_orcid_fris(orcid: str, pageNumber: int = 0, pageSize: int = 2, publicationNumber: int = 0) -> zeep.AnyObject:
     """
@@ -142,7 +143,7 @@ def get_publications_fris(soapResult: zeep.AnyObject) -> List[str]:
         try: # check if response is a research paper and, if it is, clean it and append it
             journals += [data[i]['journalContribution']['unpaywallDoi']
                          ['doiUrl'].replace('https://doi.org/', '')]
-        except KeyError:
+        except Exception:
             pass # if it is not, then skip
     return journals
 

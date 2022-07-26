@@ -1,9 +1,10 @@
+from typing import List
 import pandas as pd
 import requests
 
-from typing import List
-from doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris, get_year_fris, make_request_doi_fris
-from profile_fris import get_publications_fris, get_uuid_fris, make_request_orcid_fris, make_request_uuid_fris
+from backend.doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris, get_year_fris, make_request_doi_fris
+from backend.profile_fris import get_publications_fris, get_uuid_fris, make_request_orcid_fris, make_request_uuid_fris
+
 
 def get_citations_doi(doi: str) -> List[str]:
     """

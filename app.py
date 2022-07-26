@@ -3,7 +3,7 @@ from flask_cors import CORS
 import numpy as np
 import pandas as pd
 from backend.profile_fris import get_keywords_fris, get_profile_name_fris, get_publications_fris, get_publications_title_year_abstract_fris, get_subject_fris, get_uuid_fris, make_request_orcid_fris, make_request_uuid_fris
-from backend.recommendations_fris import get_all_recs_author, get_all_seggested_papers
+from backend.recommendations_fris import get_all_recs_author, get_all_recs_title_author_year_abstract
 from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
@@ -55,8 +55,8 @@ def getSuggestedConnections(orcid):
 
 @app.route("/profile/recommendations/<orcid>")
 def getRecommendations(orcid):
-    output = get_all_seggested_papers(orcid)
-    return jsonify([x[0] for x in output if x != []])  # to remove empty arrays
+    output = get_all_recs_title_author_year_abstract(orcid)
+    return jsonify(output)  # to remove empty arrays
 
 
 @app.route("/profile/dois/<orcid>")
