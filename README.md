@@ -35,7 +35,7 @@ check http://127.0.0.1:5000/api/docs/ for the Swagger UI docs
 - [backend/](/backend) --> this directory contains the files used by the flask server
 - [LICENSE](license.txt) --> License used by this project
 - [README.md](README.md) --> this
-- The whole project is containerised and there is a Dockerfile available in the project. 
+- The whole project is containerised and there is a [Dockerfile](Dockerfile) available in the project. 
 
 
 ## License
