@@ -1,18 +1,16 @@
 let DOWNLOADS = ""
-// let flask_hostname="https://api.the-impact-of-sharing-knowledge.osoc.be"
-let flask_hostname="http://127.0.0.1:5000"
+let flask_hostname="https://api.the-impact-of-sharing-knowledge.osoc.be"
+// let flask_hostname="http://127.0.0.1:5000"
 /////show data/////////////////
 
-function addTimeline(workcounts, years) {
+function addTimeline(workcounts,citations, years) {
     let tekst = ""
     for (let i = years.length - 1; i >= 0; i--) {
         tekst += `<li>
-            <p class="diplome">${workcounts[i]} publications</p>
-            <p class="year">${years[i]}</p>
+        <p class="diplome">${workcounts[i]} publications <br> ${citations[i]} citations</p>
+        <p class="year">${years[i]}</p>
             <span class="point"></span>
-            <p class="description">
-              you have written ${workcounts[i]} publications in that department
-            </p>
+            
           </li>`
     }
     document.querySelector("#js_timeline").innerHTML = tekst
@@ -55,7 +53,7 @@ function showCitationsAndWorkCount(data) {
             text: 'citations per year'
         }
     });
-    addTimeline(workcounts, years)
+    addTimeline(workcounts,citations, years)
 
 }
 
@@ -81,7 +79,7 @@ function showConnections(data) {
             <h3>${name}</h3>
 
             <a href="#" class="circle">
-              <img height="128" width="128" src="https://i.pravatar.cc/${300 + i}" alt="picture of researcher" />
+              <img height="128" width="128" src="placeholder.png" alt="picture of researcher" />
             </a>
           </div>
         `
