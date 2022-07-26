@@ -9,7 +9,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "127.0.0.1:5000",
+  "host": "api.the-impact-of-sharing-knowledge.osoc.be",
   "tags": [
     {
       "name": "myresearch",
@@ -21,7 +21,7 @@
     }
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/myresearch/publications/{orcid}": {
@@ -156,7 +156,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Recommendation"
+                "$ref": "#/definitions/Publication"
               }
             }
           }
@@ -204,55 +204,6 @@
       "required": [
         "name",
         "abstract",
-        "doi",
-        "title",
-        "year"
-      ],
-      "properties": {
-        "abstract": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "author": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "doi": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "xml": {
-              "name": "doi"
-            }
-          },
-          "format": "int64"
-        },
-        "title": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "year": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          }
-        }
-      },
-      "xml": {
-        "name": "Publications"
-      }
-    },
-    "Recommendation": {
-      "type": "object",
-      "required": [
-        "name",
-        "abstract",
         "title",
         "year"
       ],
@@ -274,7 +225,7 @@
         }
       },
       "xml": {
-        "name": "Recommendation"
+        "name": "Publication"
       }
     },
     "Description": {
