@@ -465,7 +465,7 @@
   }
   li .diplome {
     position: absolute;
-    top: -47px;
+    top: -70px;
     left: 36%;
     color: #000000;
   }
@@ -509,14 +509,7 @@
   }
   
   /* ---- Hover effects ---- */
-  li:hover {
-    cursor: pointer;
-    color: #505050;
-    
-  }
-  li:hover .description {
-    display: block;
-  }
+
 
   .card-title{
     color:#6558f5;
@@ -581,4 +574,11 @@ a{
  a:hover{
   color: #6558f5;
   text-decoration: none;
+}
+.navbar{
+  background-color: white;
+}
+
+.logo{
+  width: 7rem;
 }
