@@ -9,10 +9,10 @@ project-the-power-of-sharing-knowledge consists of two parts:
 - A back-end Flask server 
 
 ## Quick start
-- our server is running live at https://api.the-impact-of-sharing-knowledge.osoc.be/
-- you can checkout the webpage at https://knowledge-impact.netlify.app/
+- Our server is running live at https://api.the-impact-of-sharing-knowledge.osoc.be/
+- You can checkout the webpage at https://knowledge-impact.netlify.app/
 
-## run locally
+## Run locally
 
 * clone this repository
 * change your directory so you're in the repository
@@ -39,5 +39,5 @@ check http://127.0.0.1:5000/api/docs/ for the Swagger UI docs
 
 
 ## License
-Developed by [Miet Claes](https://github.com/mietcls), [Pieterjan Dendauw](https://github.com/dendpj), [Alba Lopez](https://github.com/alba-lopez), [Raman Talwar](https://github.com/rtalwar2), [Chanel Frederix](https://www.linkedin.com/in/chanel-frederix-0397b3221/), [Lyka Cabatay](https://www.linkedin.com/in/lykacabatay/) and [Ava Blanche](https://www.linkedin.com/in/avablanche/) for [Open Summer Of Code](https://osoc.be/) 2022.
+Developed by [Miet Claes](https://github.com/mietcls), [Pieterjan Dendauw](https://github.com/dendpj), [Alba Lopez](https://github.com/alba-lopez), [Fien Goeman](https://github.com/FienGoeman), [Raman Talwar](https://github.com/rtalwar2), [Chanel Frederix](https://www.linkedin.com/in/chanel-frederix-0397b3221/), [Lyka Cabatay](https://www.linkedin.com/in/lykacabatay/) and [Ava Blanche](https://www.linkedin.com/in/avablanche/) for [Open Summer Of Code](https://osoc.be/) 2022.
 This software is licensed under the [MIT license](LICENSE).
