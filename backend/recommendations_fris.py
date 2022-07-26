@@ -107,7 +107,6 @@ def get_all_recs_title_author_year_abstract(orcid: str) -> List[dict]: # suggest
     # suggestion: eliminate duplicates (dict type objects)
     return fris_papers
 
-# print(get_all_recs_title_author_year_abstract('0000-0003-4706-7950'))
 
 def get_recs_author_fris(doi: str) -> List[str]: # suggests other authors (those that have noticed/cited researcher)
     """
@@ -145,7 +144,5 @@ def get_all_recs_author(orcid: str) -> List[str]: # suggests other authors (thos
             fris_authors += [a]
     fris_authors = list(dict.fromkeys(fris_authors)) # eliminate duplicates
     return fris_authors
-
-#print(get_all_recs_author('0000-0003-4706-7950'))
 
 
