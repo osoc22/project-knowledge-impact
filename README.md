@@ -23,7 +23,7 @@ cd ./project-the-power-of-sharing-knowledge
 docker build --tag final .
 docker run -p 5000:5000 final
 ```
-open index.html in your browser
+open index.html in your browser, enter the desired researcher´s orcid id, and press the ‘search’ button.
 
 check http://127.0.0.1:5000/api/docs/ for the Swagger UI docs
 
