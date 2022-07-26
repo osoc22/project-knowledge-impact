@@ -33,7 +33,7 @@ check http://127.0.0.1:5000/api/docs/ for the Swagger UI docs
 - In the main directory there is the app.py file, (+ which starts the Flask server), and the index.html file, which is the main page of our web application.
 - [frontend/](/frontend) --> this directory contains all the html and css files for the front-end 
 - [backend/](/backend) --> this directory contains the files used by the flask server
-- [LICENSE](LICENSE) --> License used by this project
+- [LICENSE](license.txt) --> License used by this project
 - [README.md](README.md) --> this
 The whole project is containerised and there is a Dockerfile available in the project. 
 
