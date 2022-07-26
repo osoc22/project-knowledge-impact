@@ -5,7 +5,7 @@ from typing import List
 
 from doi_request_fris import get_abstract_fris, get_author_fris, get_title_fris, get_year_fris, make_request_doi_fris
 
-def make_request_orcid_fris(orcid: str, pageNumber: int = 0, pageSize: int = 2, publicationNumber: int = 0) -> zeep.AnyObject:
+def make_request_orcid_fris(orcid: str, pageNumber: int = 0, pageSize: int = 2) -> zeep.AnyObject:
     """
     :param orcid: orcid from which to get xml response (example format: '0000-0003-4706-7950')
     :param pageNumber:
@@ -45,11 +45,11 @@ def make_request_orcid_fris(orcid: str, pageNumber: int = 0, pageSize: int = 2, 
     return soapResult
 
 
-def make_request_uuid_fris(uuid: str, pageNumber: int = 0, pageSize: int = 15, publicationNumber: int = 0) -> zeep.AnyObject:
+def make_request_uuid_fris(uuid: str, pageNumber: int = 0, pageSize: int = 15) -> zeep.AnyObject:
     """
     :param uuid: uuid from which to get xml response (example format: '1727939a-543a-4184-841f-944ee16db418')
-    :param pageNumber:
-    :param pageSize:
+    :param pageNumber: requested page number
+    :param pageSize: quantity of results returned in each page
     :param publicationNumber:
     :return: xml response of uuid (zeep object) (contains info such as research papers published)
             - if uuid is not found in FRIS -> returns xml response with '_value_1': {} and 'total': 0 (empty)
