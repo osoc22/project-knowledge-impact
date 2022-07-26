@@ -4,8 +4,6 @@ let flask_hostname="http://127.0.0.1:5000"
 /////show data/////////////////
 
 function addTimeline(workcounts, years) {
-    // console.log(workcounts)
-    // console.log(years)
     let tekst = ""
     for (let i = years.length - 1; i >= 0; i--) {
         tekst += `<li>
@@ -20,12 +18,10 @@ function addTimeline(workcounts, years) {
     document.querySelector("#js_timeline").innerHTML = tekst
 }
 function showCitationsAndWorkCount(data) {
-    // console.log(data)
     let years = []
     let workcounts = []
     let citations = []
     for (let obj of data.counts_by_year) {
-        // console.log(obj)
         years.push(obj.year)
         workcounts.push(obj.works_count)
         citations.push(obj.cited_by_count)
@@ -54,6 +50,7 @@ function showCitationsAndWorkCount(data) {
     plot[0].y = citations
     Plotly.newPlot('js_citations', plot, {
         xaxis: { tickformat: '.0f' },
+        yaxis: { rangemode: 'tozero'},
         title: {
             text: 'citations per year'
         }
@@ -156,6 +153,7 @@ function showDownloads(data) {
     Plotly.newPlot('js_downloads', plot,
         {
             xaxis: { tickformat: '.0f' },
+            yaxis: { rangemode: 'tozero'},
             title: {
                 text: 'biblio downloads per year'
             }
@@ -279,7 +277,7 @@ const loadDois = function (orcid) {
 };
 
 const loadDownloads = function () {
-    fetch('../backend/table_doi_downloads_osoc_2022.json')
+    fetch('./table_doi_downloads.json')
         .then(function (response) {
             if (!response.ok) {
                 throw Error(`Probleem bij de fetch(). Status Code: ${response.status}`);

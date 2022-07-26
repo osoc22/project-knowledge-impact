@@ -40,7 +40,7 @@ def getPublications(orcid):
 
 @app.route("/profile/description/<orcid>")
 def getDescription(orcid):
-    soapResult = make_request_orcid_fris(orcid, 0, 25, 0)
+    soapResult = make_request_orcid_fris(orcid, 0, 25)
     output = {}
     output["name"] = get_profile_name_fris(soapResult)
     output["description"] = get_subject_fris(soapResult)
@@ -61,9 +61,9 @@ def getRecommendations(orcid):
 
 @app.route("/profile/dois/<orcid>")
 def getAlldois(orcid):
-    soapResult = make_request_orcid_fris(orcid, 0, 2, 0)
+    soapResult = make_request_orcid_fris(orcid, 0, 2)
     uuid = get_uuid_fris(soapResult)
-    soapResult2 = make_request_uuid_fris(uuid, 0, 15, 0)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 15)
     return jsonify(get_publications_fris(soapResult2))
 
 
