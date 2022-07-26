@@ -1,7 +1,7 @@
 # project-the-power-of-sharing-knowledge
 
 <div align="center">
-  <img src=".Crest_KnowledgeImpact.svg" width="250px" />
+  <img src="Crest_KnowledgeImpact.svg" width="250px" />
 </div>
 
 project-the-power-of-sharing-knowledge consists of two parts:
