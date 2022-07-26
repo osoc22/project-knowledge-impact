@@ -37,6 +37,9 @@ check http://127.0.0.1:5000/api/docs/ for the Swagger UI docs
 - [README.md](README.md) --> this
 - The whole project is containerised and there is a [Dockerfile](Dockerfile) available in the project. 
 
+## Notice
+- The full_text downloads data is only available for researchers from Ghent University and only from the last 2.5 years.
+- Currently, only 15 research outputs are queried from FRIS.
 
 ## License
 Developed by [Miet Claes](https://github.com/mietcls), [Pieterjan Dendauw](https://github.com/dendpj), [Alba Lopez](https://github.com/alba-lopez), [Fien Goeman](https://github.com/FienGoeman), [Raman Talwar](https://github.com/rtalwar2), [Chanel Frederix](https://www.linkedin.com/in/chanel-frederix-0397b3221/), [Lyka Cabatay](https://www.linkedin.com/in/lykacabatay/) and [Ava Blanche](https://www.linkedin.com/in/avablanche/) for [Open Summer Of Code](https://osoc.be/) 2022.
