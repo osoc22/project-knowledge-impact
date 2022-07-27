@@ -8,7 +8,7 @@ function showPublications(data) {
     for (let obj of data) {
         if (obj.abstract == "") { obj.abstract = "---" }
         text += `<div class="row">
-        <div class="col-11">
+        <div class="col-11 mb-10">
           <div class="card">
             <div class="card-body">
               <h3 class="card-title">${obj.title}</h3>
@@ -17,7 +17,6 @@ function showPublications(data) {
                 ${obj.abstract}
                 </p>
               <p class="card-text"><small class="text-muted">${obj.author}</small></p>
-
               <a href="#" class="btn btn-primary disabled">details</a>
             </div>
           </div>

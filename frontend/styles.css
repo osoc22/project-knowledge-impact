@@ -10,11 +10,11 @@
   body {
     overflow-x: hidden;
   }
-  body.sticky-footer {
+  /* body.sticky-footer {
     margin-bottom: 56px;
-  }
+  } */
   body.sticky-footer .content-wrapper {
-    min-height: calc(100vh - 56px - 56px);
+    min-height: calc(100vh - 56px - 56px - 56px);
   }
   body.fixed-nav {
     padding-top: 56px;
@@ -581,4 +581,17 @@ a{
 
 .logo{
   width: 7rem;
+}
+
+.partner_logo{
+  width:128px
+}
+
+.footer {
+  height: 50px;
+  margin-top: -50px;
+}
+
+.mb-10{
+  margin-bottom: 10px;
 }
