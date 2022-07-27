@@ -42,5 +42,5 @@ check http://127.0.0.1:5000/api/docs/ for the Swagger UI docs
 - Currently, only 15 research outputs are queried from FRIS.
 
 ## License
-Developed by [Miet Claes](https://github.com/mietcls), [Pieterjan Dendauw](https://github.com/dendpj), [Alba Lopez](https://github.com/alba-lopez), [Fien Goeman](https://github.com/FienGoeman), [Raman Talwar](https://github.com/rtalwar2), [Chanel Frederix](https://www.linkedin.com/in/chanel-frederix-0397b3221/), [Lyka Cabatay](https://www.linkedin.com/in/lykacabatay/) and [Ava Blanche](https://www.linkedin.com/in/avablanche/) for [Open Summer Of Code](https://osoc.be/) 2022.
+Developed by [Miet Claes](https://github.com/mietcls), [Pieterjan Dendauw](https://github.com/dendpj), [Alba Lopez](https://github.com/alba-lopez), [Fien Goeman](https://github.com/FienGoeman), [Raman Talwar](https://github.com/rtalwar2), [Chanel Frederix](https://www.linkedin.com/in/chanel-frederix-0397b3221/), [Lyka Cabatay](https://www.linkedin.com/in/lykacabatay/) and [Ava Blanche](www.blinge.design) for [Open Summer Of Code](https://osoc.be/) 2022.
 This software is licensed under the [MIT license](license.txt).
