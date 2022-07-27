@@ -1,5 +1,5 @@
 let DOWNLOADS = ""
-let flask_hostname="https://api.the-impact-of-sharing-knowledge.osoc.be"
+let flask_hostname="https://api.knowledge-impact.osoc.be"
 // let flask_hostname="http://127.0.0.1:5000"
 /////show data/////////////////
 
