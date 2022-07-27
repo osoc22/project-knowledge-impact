@@ -121,8 +121,12 @@ h6,
 
 
 a {
-	color: #f14a3b;
+	color: #234A68;
 }
+
+	a:hover {
+		background-color: #EDEBBA;
+	}
 
 	h1 a,
 	h2 a,
