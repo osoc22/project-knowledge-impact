@@ -9,7 +9,7 @@ project-the-power-of-sharing-knowledge consists of two parts:
 - A back-end Flask server 
 
 ## Quick start
-- Our server is running live at https://api.the-impact-of-sharing-knowledge.osoc.be/
+- Our server is running live at https://api.knowledge-impact.osoc.be
 - You can checkout the webpage at https://knowledge-impact.netlify.app/
 
 ## Run locally
