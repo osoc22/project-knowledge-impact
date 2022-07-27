@@ -38,8 +38,11 @@ check http://127.0.0.1:5000/api/docs/ for the Swagger UI docs
 - The whole project is containerised and there is a [Dockerfile](Dockerfile) available in the project. 
 
 ## Notice
-- The full_text downloads data is only available for researchers from Ghent University and only from the last 2.5 years.
-- Currently, only 15 research outputs are queried from FRIS.
+- The Biblio full-text downloads data is only available for researchers from Ghent University and only from the last 2.5 years, so it may not be representative of the researcher´s career.
+- Currently, only 15 “research outputs” at a time are retrieved from FRIS so the web application loads relatively quickly. Therefore, shown results are limited.
+- Only research papers (JournalContributions) are retrieved so that results remain relevant. Therefore, shown results are limited.
+- Recommendations only include research papers/researchers that are available in FRIS. Therefore, shown results are limited.
+- There are missing metadata about publications, so results may not always be available or complete. More information about missing metadata from biblio can be found on https://drive.google.com/file/d/1LMpakm6wecEST0f34oyVjc2cL2Hgxx1-/view?usp=sharing and https://drive.google.com/file/d/148_gY3iDnVcf8cqyvEgYRcCz0bVemFok/view?usp=sharing
 
 ## License
 Developed by [Miet Claes](https://github.com/mietcls), [Pieterjan Dendauw](https://github.com/dendpj), [Alba Lopez](https://github.com/alba-lopez), [Fien Goeman](https://github.com/FienGoeman), [Raman Talwar](https://github.com/rtalwar2), [Chanel Frederix](https://www.linkedin.com/in/chanel-frederix-0397b3221/), [Lyka Cabatay](https://www.linkedin.com/in/lykacabatay/) and [Ava Blanche](https://www.blinge.design) for [Open Summer Of Code](https://osoc.be/) 2022.
