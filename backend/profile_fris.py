@@ -154,7 +154,7 @@ def get_publications_title_year_abstract_fris(orcid: str) -> List[dict]:
     """
     soapResult = make_request_orcid_fris(orcid, 0, 2)
     uuid = get_uuid_fris(soapResult)
-    soapResult2 = make_request_uuid_fris(uuid, 0, 30)
+    soapResult2 = make_request_uuid_fris(uuid, 0, 15)
     dois = get_publications_fris(soapResult2)
     output = []
     for d in dois:

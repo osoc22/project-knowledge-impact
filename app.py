@@ -40,7 +40,7 @@ def getPublications(orcid):
 
 @app.route("/profile/description/<orcid>")
 def getDescription(orcid):
-    soapResult = make_request_orcid_fris(orcid, 0, 25)
+    soapResult = make_request_orcid_fris(orcid, 0, 2)
     output = {}
     output["name"] = get_profile_name_fris(soapResult)
     output["description"] = get_subject_fris(soapResult)
