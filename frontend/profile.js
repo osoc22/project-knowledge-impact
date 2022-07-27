@@ -100,8 +100,8 @@ function showRecommendations(data) {
         <div class="col-11">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">${obj.title}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">${obj.year}</h6>
+              <h3 class="card-title">${obj.title}</h3>
+              <h4 class="card-subtitle mb-2 text-muted">${obj.year}</h4>
               <p class="card-text"><h6>Abstract</h6>
                 ${obj.abstract}
                 </p>
@@ -171,9 +171,9 @@ function showTools(data) {
         <div class="card" style="width: 18rem;">
         <img src="${data.results[i].logo}" class="card-img-top" alt="${data.results[i].abbreviation}">
         <div class="card-body">
-          <h5 class="card-title">${data.results[i].name}</h5>
+          <h3 class="card-title">${data.results[i].name}</h3>
+          <h4 class="card-subtitle mb-2 text-muted">organisation: ${data.facets[1].values[i].label}</h4>
           <p class="card-text">${data.results[i].description.substr(0, 105) + '...'}</p>
-          <h6 class="card-subtitle mb-2 text-muted">organisation: ${data.facets[1].values[i].label}</h6>
           <a href="${data.results[i].webpage}" class="btn btn-primary">learn More</a>
       </div>
     </div>

@@ -11,8 +11,8 @@ function showPublications(data) {
         <div class="col-11">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">${obj.title}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">${obj.year}</h6>
+              <h3 class="card-title">${obj.title}</h3>
+              <h4 class="card-subtitle mb-2 text-muted">${obj.year}</h4>
               <p class="card-text"><h6>Abstract</h6>
                 ${obj.abstract}
                 </p>
