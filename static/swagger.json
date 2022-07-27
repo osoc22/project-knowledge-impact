@@ -9,7 +9,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "api.the-impact-of-sharing-knowledge.osoc.be",
+  "host": "api.knowledge-impact.osoc.be",
   "tags": [
     {
       "name": "myresearch",
