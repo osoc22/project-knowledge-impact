@@ -67,14 +67,14 @@
 	.hero-card:before {
 		content:"";
 		display: block;
-		width: 80rem;
+		width: 100rem;
 		height: 50rem;
 		position: absolute;
 		z-index: -1;
-		background-image: url("../img/osoc-emblem.png");
+		background-image: url("../img/knowledge-impact-emblem.svg");
 		background-size: contain;
 		background-repeat: no-repeat;
-		right: -25rem;
+		right: -70rem;
 		bottom: -5rem;
 	}
 
