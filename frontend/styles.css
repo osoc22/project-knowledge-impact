@@ -583,3 +583,7 @@ a{
   width: 7rem;
   margin-right: 1em;
 }
+.error{
+  color:red;
+  font-style: italic;
+}
