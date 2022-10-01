@@ -591,7 +591,10 @@ a{
   height: 50px;
   margin-top: -50px;
 }
-
 .mb-10{
   margin-bottom: 10px;
+}
+.error{
+  color:red;
+  font-style: italic;
 }
