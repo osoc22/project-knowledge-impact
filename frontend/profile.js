@@ -85,8 +85,12 @@ function showConnections(data) {
         `
         i++
     }
-    if (text == "") { text = "no connections available" }
-    document.querySelector("#js_connections").classList.add('row')
+    if (text == "") { 
+        text = "no connections available" 
+    }
+    else{
+            document.querySelector("#js_connections").classList.add('row')
+    }
 
     document.querySelector("#js_connections").innerHTML = text
 }
